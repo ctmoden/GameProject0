@@ -119,6 +119,7 @@ namespace GameProject0
                 //rectangle is new "chunk" of helo image that represents a different part 
                 //of the animation
                 var sourceRectangle = new Rectangle(animationFrame * 8, animationRow * 8, 8, 8);
+                //draw with upadted position and source rectangle
                 spriteBatch.Draw(texture, Position, sourceRectangle, Color.White);
             }
         }
