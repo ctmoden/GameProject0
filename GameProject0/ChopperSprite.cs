@@ -103,7 +103,7 @@ namespace GameProject0
             //update timer based on elapsed time in game
             //elapsed time = elapsed time since last update
             animationTimer += gameTime.ElapsedGameTime.TotalSeconds;
-            if (animationTimer > 0.2)
+            if (animationTimer > 0.03)
             {
                 animationFrame++;
                 //reached end of current row, reset to first pos in next row
@@ -113,13 +113,13 @@ namespace GameProject0
                     animationRow++;
                     if (animationRow > 7) animationRow = 0;
                 }
-                animationTimer -= 0.2;
+                animationTimer -= 0.03;
                 //reset timer
             }    
                 //rectangle updated between spriteBatch begin and end
                 //rectangle is new "chunk" of helo image that represents a different part 
                 //of the animation
-                var sourceRectangle = new Rectangle(animationFrame * 8, animationRow * 8, 8, 8);
+                var sourceRectangle = new Rectangle(animationFrame * 256, animationRow * 256, 256, 256);
                 //draw with upadted position and source rectangle
                 spriteBatch.Draw(texture, Position, sourceRectangle, Color.White);     
         }
