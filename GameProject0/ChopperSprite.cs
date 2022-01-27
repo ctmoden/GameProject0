@@ -86,10 +86,10 @@ namespace GameProject0
             {
                 //FIXME: 150 = pixels/frame, pixels/second, or what?
                 case Direction.Left:
-                    Position += new Vector2(1, 0) * PIXEL_SPEED * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                    Position += new Vector2(-1, 0) * PIXEL_SPEED * (float)gameTime.ElapsedGameTime.TotalSeconds;
                     break;
                 case Direction.Right:
-                    Position += new Vector2(-1, 0) * PIXEL_SPEED * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                    Position += new Vector2(1, 0) * PIXEL_SPEED * (float)gameTime.ElapsedGameTime.TotalSeconds;
                     break;
             }
         }
