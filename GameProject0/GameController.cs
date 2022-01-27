@@ -24,7 +24,7 @@ namespace GameProject0
             //instantiate animated chopper sprite
             chopper = new ChopperSprite()
             {
-                Position = new Vector2(250, 300)
+                Position = new Vector2(250, 300), Direction = Direction.Right
             };
             base.Initialize();
         }

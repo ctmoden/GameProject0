@@ -107,21 +107,21 @@ namespace GameProject0
             {
                 animationFrame++;
                 //reached end of current row, reset to first pos in next row
-                if(animationFrame > 7)
+                if (animationFrame > 7)
                 {
                     animationFrame = 0;
                     animationRow++;
                     if (animationRow > 7) animationRow = 0;
                 }
+                animationTimer -= 0.2;
                 //reset timer
-                animationTimer -= .2;
+            }    
                 //rectangle updated between spriteBatch begin and end
                 //rectangle is new "chunk" of helo image that represents a different part 
                 //of the animation
                 var sourceRectangle = new Rectangle(animationFrame * 8, animationRow * 8, 8, 8);
                 //draw with upadted position and source rectangle
-                spriteBatch.Draw(texture, Position, sourceRectangle, Color.White);
-            }
+                spriteBatch.Draw(texture, Position, sourceRectangle, Color.White);     
         }
     }
 }
