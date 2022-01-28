@@ -61,7 +61,7 @@ namespace GameProject0
         /// <param name="content"></param>
         public void LoadContent(ContentManager content)
         {
-            texture = content.Load<Texture2D>("helo");
+            texture = content.Load<Texture2D>("Output");
         }
         /// <summary>
         /// Update chopper animation
