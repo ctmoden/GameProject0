@@ -9,7 +9,9 @@ using Microsoft.Xna.Framework.Content;
 
 namespace GameProject0
 {
-
+    /// <summary>
+    /// Direction chopper yaws left to right
+    /// </summary>
     public enum Direction
     {
         Right = 0,

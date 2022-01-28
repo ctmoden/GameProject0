@@ -4,6 +4,9 @@ using Microsoft.Xna.Framework.Input;
 
 namespace GameProject0
 {
+    /// <summary>
+    /// Controls game loop
+    /// </summary>
     public class GameController : Game
     {
         private GraphicsDeviceManager graphics;
@@ -18,7 +21,9 @@ namespace GameProject0
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
         }
-
+        /// <summary>
+        /// initializes assets as needed
+        /// </summary>
         protected override void Initialize()
         {
             //instantiate animated chopper sprite
@@ -28,7 +33,9 @@ namespace GameProject0
             };
             base.Initialize();
         }
-
+        /// <summary>
+        /// loads all assets of game
+        /// </summary>
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
@@ -38,7 +45,10 @@ namespace GameProject0
             bangers = Content.Load<SpriteFont>("bangers");
             // TODO: use this.Content to load your game content here
         }
-
+        /// <summary>
+        /// updates game as it is rendered, updates animated chopper and looks for exit input
+        /// </summary>
+        /// <param name="gameTime"></param>
         protected override void Update(GameTime gameTime)
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape) 
