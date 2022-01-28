@@ -24,7 +24,7 @@ namespace GameProject0
             //instantiate animated chopper sprite
             chopper = new ChopperSprite()
             {
-                Position = new Vector2(250, 300), Direction = Direction.Right
+                Position = new Vector2(160, 230), Direction = Direction.Right
             };
             base.Initialize();
         }
@@ -49,16 +49,22 @@ namespace GameProject0
             chopper.Update(gameTime);
             base.Update(gameTime);
         }
-
+        /// <summary>
+        /// draw sprites in order specified, multiple clouds drawn at different positions and 
+        /// sizes
+        /// </summary>
+        /// <param name="gameTime"></param>
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
             spriteBatch.Begin();
-            spriteBatch.DrawString(bangers, "Choppa Fight!!", new Vector2(250, 100), Color.Black);
-            spriteBatch.DrawString(bangers, "Press esc to quit", new Vector2(250, 200), Color.Black);
-            //drawing a cloud
-            //FIXME scale to appropriate size
-            spriteBatch.Draw(atlas, new Vector2(50, 50), new Rectangle(80, 32, 16, 16), Color.White);
+            spriteBatch.DrawString(bangers, "Choppa Fight!!", new Vector2(250, 10), Color.Black);
+            spriteBatch.DrawString(bangers, "Press esc or q to quit", new Vector2(270, 80), Color.Black,0f,new Vector2(),.50f,SpriteEffects.None,0);
+            //drawing three clouds
+            spriteBatch.Draw(atlas, new Vector2(50, 50), new Rectangle(80, 32, 16, 16), Color.White,0f,new Vector2(8,8),8,SpriteEffects.None,0);//, 1, new Vector2(100,100), 100,SpriteEffects.None, 1);
+            spriteBatch.Draw(atlas, new Vector2(700, 100), new Rectangle(80, 32, 16, 16), Color.White, 0f, new Vector2(8, 8), 6, SpriteEffects.None, 0);
+            spriteBatch.Draw(atlas, new Vector2(200, 223), new Rectangle(80, 32, 16, 16), Color.White, 0f, new Vector2(8, 8), 7, SpriteEffects.None, 0);
+            spriteBatch.Draw(atlas, new Vector2(550, 300), new Rectangle(80, 32, 16, 16), Color.White, 0f, new Vector2(8, 8), 10, SpriteEffects.None, 0);
             chopper.Draw(gameTime, spriteBatch);
             spriteBatch.End();
             base.Draw(gameTime);

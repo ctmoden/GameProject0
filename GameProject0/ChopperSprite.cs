@@ -21,6 +21,10 @@ namespace GameProject0
     /// </summary>
     public class ChopperSprite
     {
+
+        /// <summary>
+        /// pixel speed of animation
+        /// </summary>
         private const int PIXEL_SPEED = 150;
         /// <summary>
         /// Texture for helicopter
