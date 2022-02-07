@@ -12,6 +12,7 @@ namespace GameProject0
         private GraphicsDeviceManager graphics;
         private SpriteBatch spriteBatch;
         private ChopperSprite chopper;
+        private CoinSprite[] coins;
         private SpriteFont bangers;
         private Texture2D atlas;
 
@@ -33,6 +34,19 @@ namespace GameProject0
             };*/
             //for game project 1
             chopper = new ChopperSprite();
+            System.Random rand = new System.Random();
+            coins = new CoinSprite[]
+            {
+                //x pos: don't care, as long as they are in view
+                //y pos: start wayyyyy off screen and have them move down?
+                new CoinSprite(new Vector2((float)rand.NextDouble() * GraphicsDevice.Viewport.Width, (float)rand.NextDouble() * GraphicsDevice.Viewport.Height)),
+                new CoinSprite(new Vector2((float)rand.NextDouble() * GraphicsDevice.Viewport.Width, (float)rand.NextDouble() * GraphicsDevice.Viewport.Height)),
+                new CoinSprite(new Vector2((float)rand.NextDouble() * GraphicsDevice.Viewport.Width, (float)rand.NextDouble() * GraphicsDevice.Viewport.Height)),
+                new CoinSprite(new Vector2((float)rand.NextDouble() * GraphicsDevice.Viewport.Width, (float)rand.NextDouble() * GraphicsDevice.Viewport.Height)),
+                new CoinSprite(new Vector2((float)rand.NextDouble() * GraphicsDevice.Viewport.Width, (float)rand.NextDouble() * GraphicsDevice.Viewport.Height)),
+                new CoinSprite(new Vector2((float)rand.NextDouble() * GraphicsDevice.Viewport.Width, (float)rand.NextDouble() * GraphicsDevice.Viewport.Height)),
+                new CoinSprite(new Vector2((float)rand.NextDouble() * GraphicsDevice.Viewport.Width, (float)rand.NextDouble() * GraphicsDevice.Viewport.Height))
+            };
             base.Initialize();
         }
         /// <summary>
@@ -41,6 +55,7 @@ namespace GameProject0
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
+            foreach (var coin in coins) coin.LoadContent(Content);
             //load chopper content
             chopper.LoadContent(Content);
             atlas = Content.Load<Texture2D>("colored_packed");
@@ -70,6 +85,10 @@ namespace GameProject0
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
             spriteBatch.Begin();
+            foreach (var coin in coins)
+            {
+                coin.Draw(gameTime, spriteBatch);
+            }
             /*
             spriteBatch.DrawString(bangers, "Choppa Fight!!", new Vector2(250, 10), Color.Black);
             spriteBatch.DrawString(bangers, "Press esc or q to quit", new Vector2(270, 80), Color.Black,0f,new Vector2(),.50f,SpriteEffects.None,0);
