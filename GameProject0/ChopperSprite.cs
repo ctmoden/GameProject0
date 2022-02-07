@@ -6,6 +6,7 @@ using Microsoft.Xna;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Input;
 
 namespace GameProject0
 {
@@ -23,6 +24,8 @@ namespace GameProject0
     /// </summary>
     public class ChopperSprite
     {
+
+        private KeyboardState keyboardState;
 
         /// <summary>
         /// pixel speed of animation
@@ -53,6 +56,10 @@ namespace GameProject0
 
         public Direction Direction;
         /// <summary>
+        /// private backing variable for Position field
+        /// </summary>
+        private Vector2 position = new Vector2(400, 400);
+        /// <summary>
         /// Position of chopper
         /// </summary>
         public Vector2 Position;
@@ -71,6 +78,11 @@ namespace GameProject0
         /// <param name="gameTime"></param>
         public void Update(GameTime gameTime)
         {
+            keyboardState = Keyboard.GetState();
+            if (keyboardState.IsKeyDown(Keys.Left)) position += new Vector2(-2, 0);
+            if (keyboardState.IsKeyDown(Keys.Right)) position += new Vector2(2, 0);
+            #region direction timer
+            /*
             directionTimer += gameTime.ElapsedGameTime.TotalSeconds;
             //switch direction every 1.5 seconds
             if(directionTimer > 1.5)
@@ -97,7 +109,8 @@ namespace GameProject0
                 case Direction.Right:
                     Position += new Vector2(1, 0) * PIXEL_SPEED * (float)gameTime.ElapsedGameTime.TotalSeconds;
                     break;
-            }
+            }*/
+            #endregion direction timer
         }
         /// <summary>
         /// draws animated helicopter sprite
@@ -127,7 +140,9 @@ namespace GameProject0
                 //of the animation
                 var sourceRectangle = new Rectangle(animationFrame * 256, animationRow * 256, 256, 256);
                 //draw with upadted position and source rectangle
-                spriteBatch.Draw(texture, Position, sourceRectangle, Color.White);     
+                //spriteBatch.Draw(texture, Position, sourceRectangle, Color.White);
+                spriteBatch.Draw(texture, position, sourceRectangle, Color.White, 0f, new Vector2(128, 128), .5f, SpriteEffects.None, 0);
+
         }
     }
 }
