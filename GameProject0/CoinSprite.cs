@@ -22,6 +22,9 @@ namespace GameProject0
 
         private Texture2D texture;
 
+        private const int PIXEL_SPEED = 150;
+
+
         //private BoundingRectangle bounds;
 
         //private BoundingCircle bounds;
@@ -81,7 +84,7 @@ namespace GameProject0
             spriteBatch.Draw(texture, position, source, Color.White);
         }
         /// <summary>
-        /// 
+        /// Update velocity and whether it is touching the bottom of the screen
         /// </summary>
         /// <param name="gameTime"></param>
         public void Update(GameTime gameTime)
