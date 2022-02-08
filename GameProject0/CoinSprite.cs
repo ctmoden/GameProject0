@@ -100,7 +100,7 @@ namespace GameProject0
             Random rand = new Random();
             if (position.Y > Constants.GAME_HEIGHT)
             {
-                position += new Vector2(0, 0);
+                //position += new Vector2(0, 0);
                 position = new Vector2((float)rand.NextDouble() * Constants.GAME_WIDTH, (float)rand.NextDouble() * Constants.GAME_HEIGHT - Constants.GAME_HEIGHT);
                 
             }
