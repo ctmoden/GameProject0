@@ -23,7 +23,10 @@ namespace GameProject0
         private Texture2D texture;
 
         private const int PIXEL_SPEED = 150;
-
+        /// <summary>
+        /// FIXME debug var for tracking coin pos
+        /// </summary>
+        public Vector2 Position => position;
 
         //private BoundingRectangle bounds;
 
@@ -85,11 +88,16 @@ namespace GameProject0
         }
         /// <summary>
         /// Update velocity and whether it is touching the bottom of the screen
+        /// Constants class for viewport dimensions?
+        /// other param options: graphics device viewport info:
+        ///     if the viewport is 
         /// </summary>
         /// <param name="gameTime"></param>
-        public void Update(GameTime gameTime)
+        public void Update(GameTime gameTime, int yPos)
         {
-
+            //FIXME change y component to be unique random num
+            position += new Vector2(0, 2);
+            if(yPos = )
         }
     }
 }
