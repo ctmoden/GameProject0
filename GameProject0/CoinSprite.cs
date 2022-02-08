@@ -93,11 +93,18 @@ namespace GameProject0
         ///     if the viewport is 
         /// </summary>
         /// <param name="gameTime"></param>
-        public void Update(GameTime gameTime, int yPos)
+        public void Update(GameTime gameTime)
         {
             //FIXME change y component to be unique random num
             position += new Vector2(0, 2);
-            if(yPos = )
+            Random rand = new Random();
+            if (position.Y > Constants.GAME_HEIGHT)
+            {
+                position += new Vector2(0, 0);
+                position = new Vector2((float)rand.NextDouble() * Constants.GAME_WIDTH, (float)rand.NextDouble() * Constants.GAME_HEIGHT - Constants.GAME_HEIGHT);
+                
+            }
+            
         }
     }
 }

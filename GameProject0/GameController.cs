@@ -40,7 +40,7 @@ namespace GameProject0
                 //x pos: don't care, as long as they are in view
                 //y pos: start wayyyyy off screen and have them move down?
                 new CoinSprite(new Vector2((float)rand.NextDouble() * GraphicsDevice.Viewport.Width, (float)rand.NextDouble() * GraphicsDevice.Viewport.Height - GraphicsDevice.Viewport.Height)),
-                new CoinSprite(new Vector2((float)rand.NextDouble() * GraphicsDevice.Viewport.Width, (float)rand.NextDouble() * GraphicsDevice.Viewport.Height)),
+                //new CoinSprite(new Vector2((float)rand.NextDouble() * GraphicsDevice.Viewport.Width, (float)rand.NextDouble() * GraphicsDevice.Viewport.Height)),
                 /*new CoinSprite(new Vector2((float)rand.NextDouble() * GraphicsDevice.Viewport.Width, (float)rand.NextDouble() * GraphicsDevice.Viewport.Height)),
                 new CoinSprite(new Vector2((float)rand.NextDouble() * GraphicsDevice.Viewport.Width, (float)rand.NextDouble() * GraphicsDevice.Viewport.Height)),
                 new CoinSprite(new Vector2((float)rand.NextDouble() * GraphicsDevice.Viewport.Width, (float)rand.NextDouble() * GraphicsDevice.Viewport.Height)),
@@ -74,7 +74,7 @@ namespace GameProject0
 
             // TODO: Add your update logic here
             chopper.Update(gameTime);
-            foreach (var coin in coins) coin.Update(gameTime, GraphicsDevice.Viewport.Height);
+            foreach (var coin in coins) coin.Update(gameTime);
             base.Update(gameTime);
         }
         /// <summary>
@@ -89,7 +89,7 @@ namespace GameProject0
             foreach (var coin in coins)
             {
                 coin.Draw(gameTime, spriteBatch);
-                //spriteBatch.DrawString(bangers, $"coin y: {coin.Position.Y}", new Vector2(2, 2), Color.Gold);
+                spriteBatch.DrawString(bangers, $"coin y: {coin.Position.Y}", new Vector2(2, 2), Color.Gold);
                 //spriteBatch.DrawString(bangers, $"coin x: {coin.Position.X}", new Vector2(2, 100), Color.Gold);
 
 
