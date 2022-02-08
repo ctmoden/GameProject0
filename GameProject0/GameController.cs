@@ -13,6 +13,7 @@ namespace GameProject0
         private SpriteBatch spriteBatch;
         private ChopperSprite chopper;
         private CoinSprite[] coins;
+        private MissileSprite[] missiles;
         private SpriteFont bangers;
         private Texture2D atlas;
 
@@ -39,13 +40,17 @@ namespace GameProject0
             {
                 //x pos: don't care, as long as they are in view
                 //y pos: start wayyyyy off screen and have them move down?
-                new CoinSprite(new Vector2((float)rand.NextDouble() * GraphicsDevice.Viewport.Width, (float)rand.NextDouble() * GraphicsDevice.Viewport.Height - GraphicsDevice.Viewport.Height)),
-                //new CoinSprite(new Vector2((float)rand.NextDouble() * GraphicsDevice.Viewport.Width, (float)rand.NextDouble() * GraphicsDevice.Viewport.Height)),
+                new CoinSprite(new Vector2((float)rand.NextDouble() * Constants.GAME_WIDTH, (float)rand.NextDouble() * Constants.GAME_WIDTH - Constants.GAME_WIDTH)),
+                new CoinSprite(new Vector2((float)rand.NextDouble() * Constants.GAME_WIDTH, (float)rand.NextDouble() * Constants.GAME_WIDTH - Constants.GAME_WIDTH)),
                 /*new CoinSprite(new Vector2((float)rand.NextDouble() * GraphicsDevice.Viewport.Width, (float)rand.NextDouble() * GraphicsDevice.Viewport.Height)),
                 new CoinSprite(new Vector2((float)rand.NextDouble() * GraphicsDevice.Viewport.Width, (float)rand.NextDouble() * GraphicsDevice.Viewport.Height)),
                 new CoinSprite(new Vector2((float)rand.NextDouble() * GraphicsDevice.Viewport.Width, (float)rand.NextDouble() * GraphicsDevice.Viewport.Height)),
                 new CoinSprite(new Vector2((float)rand.NextDouble() * GraphicsDevice.Viewport.Width, (float)rand.NextDouble() * GraphicsDevice.Viewport.Height)),
                 new CoinSprite(new Vector2((float)rand.NextDouble() * GraphicsDevice.Viewport.Width, (float)rand.NextDouble() * GraphicsDevice.Viewport.Height))*/
+            };
+            missiles = new MissileSprite[]
+            {
+                new MissileSprite(new Vector2((float)rand.NextDouble() * Constants.GAME_WIDTH, (float)rand.NextDouble() * Constants.GAME_WIDTH - Constants.GAME_WIDTH))
             };
             base.Initialize();
         }
@@ -56,6 +61,7 @@ namespace GameProject0
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
             foreach (var coin in coins) coin.LoadContent(Content);
+            foreach (var missile in missiles) missile.LoadContent(Content);
             //load chopper content
             chopper.LoadContent(Content);
             atlas = Content.Load<Texture2D>("colored_packed");
@@ -75,6 +81,7 @@ namespace GameProject0
             // TODO: Add your update logic here
             chopper.Update(gameTime);
             foreach (var coin in coins) coin.Update(gameTime);
+            foreach (var missile in missiles) missile.Update(gameTime);
             base.Update(gameTime);
         }
         /// <summary>
@@ -89,10 +96,12 @@ namespace GameProject0
             foreach (var coin in coins)
             {
                 coin.Draw(gameTime, spriteBatch);
-                spriteBatch.DrawString(bangers, $"coin y: {coin.Position.Y}", new Vector2(2, 2), Color.Gold);
+                //spriteBatch.DrawString(bangers, $"coin y: {coin.Position.Y}", new Vector2(2, 2), Color.Gold);
                 //spriteBatch.DrawString(bangers, $"coin x: {coin.Position.X}", new Vector2(2, 100), Color.Gold);
-
-
+            }
+            foreach(var missile in missiles)
+            {
+                missile.Draw(gameTime, spriteBatch);
             }
             /*
             spriteBatch.DrawString(bangers, "Choppa Fight!!", new Vector2(250, 10), Color.Black);

@@ -63,6 +63,10 @@ namespace GameProject0
         /// Position of chopper
         /// </summary>
         public Vector2 Position;
+        /// <summary>
+        /// property to detect if missile has hit the chopper
+        /// </summary>
+        private bool hit = false;
 
         /// <summary>
         /// loads texture
