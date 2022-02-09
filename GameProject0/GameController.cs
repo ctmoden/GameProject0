@@ -9,6 +9,7 @@ namespace GameProject0
     /// </summary>
     public class GameController : Game
     {
+        //FIXME group private fields into regions
         private GraphicsDeviceManager graphics;
         private SpriteBatch spriteBatch;
         private ChopperSprite chopper;
@@ -16,6 +17,7 @@ namespace GameProject0
         private MissileSprite[] missiles;
         private SpriteFont bangers;
         private Texture2D atlas;
+        private Texture2D ball;
         private static int coinCount = 0;
 
         public GameController()
@@ -70,6 +72,8 @@ namespace GameProject0
             atlas = Content.Load<Texture2D>("colored_packed");
             bangers = Content.Load<SpriteFont>("bangers");
             // TODO: use this.Content to load your game content here
+            ball = Content.Load<Texture2D>("ball");
+
         }
         /// <summary>
         /// updates game as it is rendered, updates animated chopper and looks for exit input
@@ -80,7 +84,6 @@ namespace GameProject0
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape) 
                 || Keyboard.GetState().IsKeyDown(Keys.Q))
                 Exit();
-
             // TODO: Add your update logic here
             chopper.Update(gameTime);
             foreach (var coin in coins) coin.Update(gameTime);
@@ -101,8 +104,15 @@ namespace GameProject0
                 coin.Draw(gameTime, spriteBatch);
                 //spriteBatch.DrawString(bangers, $"coin y: {coin.Position.Y}", new Vector2(2, 2), Color.Gold);
                 //spriteBatch.DrawString(bangers, $"coin x: {coin.Position.X}", new Vector2(2, 100), Color.Gold);
+                #region coin bounding region debugging
+                var rect = new Rectangle((int)(coin.Bounds.Center.X - coin.Bounds.Radius),
+                    (int)(coin.Bounds.Center.Y - coin.Bounds.Radius),
+                    (int)(2*coin.Bounds.Radius), (int)(2*coin.Bounds.Radius));
+
+                spriteBatch.Draw(ball, rect, Color.White);
+                #endregion coin bounding region debugging
             }
-            foreach(var missile in missiles)
+            foreach (var missile in missiles)
             {
                 missile.Draw(gameTime, spriteBatch);
             }
@@ -113,6 +123,12 @@ namespace GameProject0
             //spriteBatch.DrawString(bangers, $"Width: {GraphicsDevice.Viewport.Width}", new Vector2(2, 2), Color.Gold);
             //spriteBatch.DrawString(bangers, $"height: {GraphicsDevice.Viewport.Height}", new Vector2(200, 200), Color.Gold);
             //drawing four clouds
+            #region chopper bounding region debugging
+            /*var rectG = new Rectangle((int)(chopper.Bounds.Center.X - chopper.Bounds.Radius),
+                    (int)(chopper.Bounds.Center.Y - chopper.Bounds.Radius),
+                    (int)(2 * chopper.Bounds.Radius), (int)(2 * chopper.Bounds.Radius));
+            spriteBatch.Draw(ball, rectG, Color.White);*/
+            #endregion chopper bounding region debugging
             spriteBatch.Draw(atlas, new Vector2(50, 50), new Rectangle(80, 32, 16, 16), Color.White,0f,new Vector2(8,8),8,SpriteEffects.None,0);//, 1, new Vector2(100,100), 100,SpriteEffects.None, 1);
             spriteBatch.Draw(atlas, new Vector2(700, 100), new Rectangle(80, 32, 16, 16), Color.White, 0f, new Vector2(8, 8), 6, SpriteEffects.None, 0);
             spriteBatch.Draw(atlas, new Vector2(200, 223), new Rectangle(80, 32, 16, 16), Color.White, 0f, new Vector2(8, 8), 7, SpriteEffects.None, 0);
