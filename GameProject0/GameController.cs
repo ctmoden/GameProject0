@@ -18,6 +18,7 @@ namespace GameProject0
         private SpriteFont bangers;
         private Texture2D atlas;
         private Texture2D ball;
+        private Texture2D rec;
         private static int coinCount = 0;
 
         public GameController()
@@ -45,6 +46,8 @@ namespace GameProject0
                 //y pos: start wayyyyy off screen and have them move down?
                 new CoinSprite(new Vector2((float)rand.NextDouble() * Constants.GAME_WIDTH, (float)rand.NextDouble() * Constants.GAME_WIDTH - Constants.GAME_WIDTH)),
                 new CoinSprite(new Vector2((float)rand.NextDouble() * Constants.GAME_WIDTH, (float)rand.NextDouble() * Constants.GAME_WIDTH - Constants.GAME_WIDTH)),
+                
+
                 /*new CoinSprite(new Vector2((float)rand.NextDouble() * GraphicsDevice.Viewport.Width, (float)rand.NextDouble() * GraphicsDevice.Viewport.Height)),
                 new CoinSprite(new Vector2((float)rand.NextDouble() * GraphicsDevice.Viewport.Width, (float)rand.NextDouble() * GraphicsDevice.Viewport.Height)),
                 new CoinSprite(new Vector2((float)rand.NextDouble() * GraphicsDevice.Viewport.Width, (float)rand.NextDouble() * GraphicsDevice.Viewport.Height)),
@@ -73,6 +76,7 @@ namespace GameProject0
             bangers = Content.Load<SpriteFont>("bangers");
             // TODO: use this.Content to load your game content here
             ball = Content.Load<Texture2D>("ball");
+            rec = Content.Load<Texture2D>("Water32Frames8x4");
 
         }
         /// <summary>
@@ -101,7 +105,6 @@ namespace GameProject0
             spriteBatch.Begin();
             foreach (var coin in coins)
             {
-                coin.Draw(gameTime, spriteBatch);
                 //spriteBatch.DrawString(bangers, $"coin y: {coin.Position.Y}", new Vector2(2, 2), Color.Gold);
                 //spriteBatch.DrawString(bangers, $"coin x: {coin.Position.X}", new Vector2(2, 100), Color.Gold);
                 #region coin bounding region debugging
@@ -110,6 +113,8 @@ namespace GameProject0
                     (int)(2*coin.Bounds.Radius), (int)(2*coin.Bounds.Radius));
 
                 spriteBatch.Draw(ball, rect, Color.White);
+                coin.Draw(gameTime, spriteBatch);
+
                 #endregion coin bounding region debugging
             }
             foreach (var missile in missiles)
@@ -128,6 +133,7 @@ namespace GameProject0
                     (int)(chopper.Bounds.Center.Y - chopper.Bounds.Radius),
                     (int)(2 * chopper.Bounds.Radius), (int)(2 * chopper.Bounds.Radius));
             spriteBatch.Draw(ball, rectG, Color.White);*/
+            
             #endregion chopper bounding region debugging
             spriteBatch.Draw(atlas, new Vector2(50, 50), new Rectangle(80, 32, 16, 16), Color.White,0f,new Vector2(8,8),8,SpriteEffects.None,0);//, 1, new Vector2(100,100), 100,SpriteEffects.None, 1);
             spriteBatch.Draw(atlas, new Vector2(700, 100), new Rectangle(80, 32, 16, 16), Color.White, 0f, new Vector2(8, 8), 6, SpriteEffects.None, 0);
