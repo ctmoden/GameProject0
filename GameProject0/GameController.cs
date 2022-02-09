@@ -16,6 +16,7 @@ namespace GameProject0
         private MissileSprite[] missiles;
         private SpriteFont bangers;
         private Texture2D atlas;
+        private static int coinCount = 0;
 
         public GameController()
         {

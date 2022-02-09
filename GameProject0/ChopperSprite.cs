@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Input;
+using GameProject0.Collisions;
 
 namespace GameProject0
 {
@@ -38,7 +39,7 @@ namespace GameProject0
         /// <summary>
         /// direction timer.  Times how long chopper moves in certian direction.
         /// </summary>
-        private double directionTimer;
+        //private double directionTimer;
         /// <summary>
         /// Controls timing of animation
         /// </summary>
@@ -67,7 +68,13 @@ namespace GameProject0
         /// property to detect if missile has hit the chopper
         /// </summary>
         private bool hit = false;
+        /// <summary>
+        /// length is 32 pixels, rad = 16 pixels
+        /// in drawing method, chopper is scaled down by 1/2, so scaled rad = 8
+        /// </summary>
+        private BoundingRectangle bounds = new BoundingRectangle(new Vector2(400 - 8, 400-8), 8, 8);
 
+        public BoundingRectangle Bounds => bounds;
         /// <summary>
         /// loads texture
         /// </summary>
@@ -85,6 +92,10 @@ namespace GameProject0
             keyboardState = Keyboard.GetState();
             if (keyboardState.IsKeyDown(Keys.Left)) position += new Vector2(-2, 0);
             if (keyboardState.IsKeyDown(Keys.Right)) position += new Vector2(2, 0);
+            //FIXME add keys for wasd and or up/down arrows?
+            //recenter bounding region as chopper moves
+            bounds.X = position.X - 8;
+            bounds.Y = position.Y - 8;
             #region direction timer
             /*
             directionTimer += gameTime.ElapsedGameTime.TotalSeconds;

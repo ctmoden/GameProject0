@@ -5,13 +5,14 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
-//using CollisionExample.Collisions;//using new namespace to access struct
+using GameProject0.Collisions;//using new namespace to access struct
 
 namespace GameProject0
 {
 
     public class CoinSprite
     {
+        
         private const float ANIMATION_SPEED = 0.1f;
 
         private double animationTimer;
@@ -30,13 +31,13 @@ namespace GameProject0
 
         //private BoundingRectangle bounds;
 
-        //private BoundingCircle bounds;
+        private BoundingCircle bounds;
 
         public bool Collected { get; set; } = false;
         /// <summary>
         /// lamda syntax for a getter
         /// </summary>
-        //public BoundingCircle Bounds => bounds;
+        public BoundingCircle Bounds => bounds;
 
         /// <summary>
         /// lamda syntax for a getter
@@ -52,7 +53,7 @@ namespace GameProject0
             //recenters bounding circle backwards by 8.  Moves center down
             //not that expensive when in constructor, if they were moving like the ghost then update in drawing method
             //need to be -8 to shift backwards 
-            //this.bounds = new BoundingCircle(position - new Vector2(-8, -8), 8);
+            this.bounds = new BoundingCircle(position - new Vector2(-8, -8), 8);
             //this.bounds = new BoundingRectangle(position, 16,16);
         }
 
