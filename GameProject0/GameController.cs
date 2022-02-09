@@ -50,7 +50,9 @@ namespace GameProject0
             };
             missiles = new MissileSprite[]
             {
+                new MissileSprite(new Vector2((float)rand.NextDouble() * Constants.GAME_WIDTH, (float)rand.NextDouble() * Constants.GAME_WIDTH - Constants.GAME_WIDTH)),
                 new MissileSprite(new Vector2((float)rand.NextDouble() * Constants.GAME_WIDTH, (float)rand.NextDouble() * Constants.GAME_WIDTH - Constants.GAME_WIDTH))
+
             };
             base.Initialize();
         }

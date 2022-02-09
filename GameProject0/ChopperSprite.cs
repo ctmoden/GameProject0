@@ -62,7 +62,7 @@ namespace GameProject0
         /// <summary>
         /// Position of chopper
         /// </summary>
-        public Vector2 Position;
+        public Vector2 Position => position;
         /// <summary>
         /// property to detect if missile has hit the chopper
         /// </summary>

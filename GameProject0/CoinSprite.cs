@@ -96,8 +96,10 @@ namespace GameProject0
         public void Update(GameTime gameTime)
         {
             //FIXME change y component to be unique random num
-            position += new Vector2(0, 2);
             Random rand = new Random();
+            int randVel = rand.Next(1, 4);
+            position += new Vector2(0, randVel);
+
             if (position.Y > Constants.GAME_HEIGHT)
             {
                 //position += new Vector2(0, 0);
