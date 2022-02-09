@@ -98,7 +98,7 @@ namespace GameProject0
         {         
             //FIXME change y component to be unique random num
             Random rand = new Random();
-            int randVel = rand.Next(1, 4);
+            int randVel = rand.Next(2, 4);
             position += new Vector2(0, randVel);
             bounds.Center = position;
             //FIXME had to add offsets to coins.  Why is center not aligned with coin?

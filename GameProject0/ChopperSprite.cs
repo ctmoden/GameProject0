@@ -69,10 +69,10 @@ namespace GameProject0
         /// </summary>
         private bool hit = false;
         /// <summary>
-        /// length is 32 pixels, rad = 16 pixels
-        /// in drawing method, chopper is scaled down by 1/2, so scaled rad = 8
+        /// length is 256 pixels, rad = 128 pixels
+        /// in drawing method, chopper is scaled down by 1/2, so scaled rad = 64
         /// </summary>
-        private BoundingRectangle bounds = new BoundingRectangle(new Vector2(400 - 8, 400-8), 8, 8);
+        private BoundingRectangle bounds = new BoundingRectangle(new Vector2(400-64, 400-64), 64, 20);
 
         public BoundingRectangle Bounds => bounds;
         /// <summary>
@@ -94,8 +94,8 @@ namespace GameProject0
             if (keyboardState.IsKeyDown(Keys.Right)) position += new Vector2(2, 0);
             //FIXME add keys for wasd and or up/down arrows?
             //recenter bounding region as chopper moves
-            bounds.X = position.X - 8;
-            bounds.Y = position.Y - 8;
+            bounds.X = position.X - 13;
+            bounds.Y = position.Y - 30;
             #region direction timer
             /*
             directionTimer += gameTime.ElapsedGameTime.TotalSeconds;

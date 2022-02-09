@@ -128,18 +128,17 @@ namespace GameProject0
             //spriteBatch.DrawString(bangers, $"Width: {GraphicsDevice.Viewport.Width}", new Vector2(2, 2), Color.Gold);
             //spriteBatch.DrawString(bangers, $"height: {GraphicsDevice.Viewport.Height}", new Vector2(200, 200), Color.Gold);
             //drawing four clouds
+            chopper.Draw(gameTime, spriteBatch);
             #region chopper bounding region debugging
-            /*var rectG = new Rectangle((int)(chopper.Bounds.Center.X - chopper.Bounds.Radius),
-                    (int)(chopper.Bounds.Center.Y - chopper.Bounds.Radius),
-                    (int)(2 * chopper.Bounds.Radius), (int)(2 * chopper.Bounds.Radius));
-            spriteBatch.Draw(ball, rectG, Color.White);*/
-            
+            var rectG = new Rectangle((int)chopper.Bounds.X,(int)chopper.Bounds.Y,
+                    (int)chopper.Bounds.Height, (int)chopper.Bounds.Width);
+            spriteBatch.Draw(rec, rectG, Color.White);           
             #endregion chopper bounding region debugging
             spriteBatch.Draw(atlas, new Vector2(50, 50), new Rectangle(80, 32, 16, 16), Color.White,0f,new Vector2(8,8),8,SpriteEffects.None,0);//, 1, new Vector2(100,100), 100,SpriteEffects.None, 1);
             spriteBatch.Draw(atlas, new Vector2(700, 100), new Rectangle(80, 32, 16, 16), Color.White, 0f, new Vector2(8, 8), 6, SpriteEffects.None, 0);
             spriteBatch.Draw(atlas, new Vector2(200, 223), new Rectangle(80, 32, 16, 16), Color.White, 0f, new Vector2(8, 8), 7, SpriteEffects.None, 0);
             spriteBatch.Draw(atlas, new Vector2(550, 300), new Rectangle(80, 32, 16, 16), Color.White, 0f, new Vector2(8, 8), 10, SpriteEffects.None, 0);
-            chopper.Draw(gameTime, spriteBatch);
+            
             spriteBatch.End();
             base.Draw(gameTime);
         }
