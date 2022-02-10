@@ -11,7 +11,7 @@ using GameProject0.Collisions;
 
 namespace GameProject0
 {
-    public class MissileSprite
+    public class MissileSprite 
     {
         private Texture2D texture;
         private Vector2 position;
@@ -24,9 +24,9 @@ namespace GameProject0
         /// Constructor for missile
         /// </summary>
         /// <param name="position"></param>
-        public MissileSprite(Vector2 position)
+        public MissileSprite()
         {
-            this.position = position;
+            position = HelperMethods.RandomVectGenerator();
             this.bounds = new BoundingRectangle(position.X, position.Y,32,14);
         }
         /// <summary>
@@ -44,16 +44,11 @@ namespace GameProject0
         
         public void Update(GameTime gameTime)//needs to take in position on update
         {
-            //FIXME change y component to be unique random num
-            Random rand = new Random();
-            //chooses random y velocity of missile
-            int randVel = rand.Next(5, 10);
-            //position += new Vector2(0, randVel);
+            //position += HelperMethods.RandomYVelGenerator(7, 8);
             position += new Vector2(0, 1);
-
             if (position.Y > Constants.GAME_HEIGHT)
             {
-                //position = new Vector2((float)rand.NextDouble() * Constants.GAME_WIDTH, (float)rand.NextDouble() * Constants.GAME_HEIGHT - Constants.GAME_HEIGHT);
+                //position = HelperMethods.RandomVectGenerator();
                 position = new Vector2(100f, 100f);
             }
             bounds.X = position.X-7;

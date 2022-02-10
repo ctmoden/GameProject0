@@ -59,7 +59,7 @@ namespace GameProject0
             {
                 //new MissileSprite(new Vector2((float)rand.NextDouble() * Constants.GAME_WIDTH, (float)rand.NextDouble() * Constants.GAME_WIDTH - Constants.GAME_WIDTH)),
                 //new MissileSprite(new Vector2((float)rand.NextDouble() * Constants.GAME_WIDTH, (float)rand.NextDouble() * Constants.GAME_WIDTH - Constants.GAME_WIDTH))
-                new MissileSprite(new Vector2(100f, 100f))
+                new MissileSprite()
             };
             base.Initialize();
         }
