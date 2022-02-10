@@ -15,6 +15,7 @@ namespace GameProject0
         private ChopperSprite chopper;
         private CoinSprite[] coins;
         private MissileSprite[] missiles;
+        private CloudSprite[] clouds;
         private SpriteFont bangers;
         private Texture2D atlas;
         private Texture2D ball;
@@ -61,6 +62,14 @@ namespace GameProject0
                 //new MissileSprite(new Vector2((float)rand.NextDouble() * Constants.GAME_WIDTH, (float)rand.NextDouble() * Constants.GAME_WIDTH - Constants.GAME_WIDTH))
                 new MissileSprite()
             };
+            clouds = new CloudSprite[]
+            {
+                new CloudSprite(),
+                new CloudSprite(),
+                new CloudSprite(),
+                new CloudSprite(),
+                new CloudSprite()
+            };
             base.Initialize();
         }
         /// <summary>
@@ -73,7 +82,8 @@ namespace GameProject0
             foreach (var missile in missiles) missile.LoadContent(Content);
             //load chopper content
             chopper.LoadContent(Content);
-            atlas = Content.Load<Texture2D>("colored_packed");
+            foreach (var cloud in clouds) cloud.LoadContent(Content);
+            //atlas = Content.Load<Texture2D>("colored_packed");
             bangers = Content.Load<SpriteFont>("bangers");
             ball = Content.Load<Texture2D>("ball");
             rec = Content.Load<Texture2D>("Water32Frames8x4");
@@ -107,6 +117,7 @@ namespace GameProject0
                 }
                 missile.Update(gameTime);
             }
+            foreach (var cloud in clouds) cloud.Update(gameTime);
             base.Update(gameTime);
         }
         /// <summary>
@@ -139,6 +150,10 @@ namespace GameProject0
                 spriteBatch.Draw(rec, rectM, Color.White);
                 #endregion missile bounding region debugging
                 missile.Draw(gameTime, spriteBatch);
+            }
+            foreach (var cloud in clouds)
+            {
+                cloud.Draw(gameTime, spriteBatch);
             }
             /*
             spriteBatch.DrawString(bangers, "Choppa Fight!!", new Vector2(250, 10), Color.Black);

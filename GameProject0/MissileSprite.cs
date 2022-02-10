@@ -6,7 +6,6 @@ using Microsoft.Xna;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework.Input;
 using GameProject0.Collisions;
 
 namespace GameProject0
@@ -27,7 +26,7 @@ namespace GameProject0
         public MissileSprite()
         {
             position = HelperMethods.RandomVectGenerator();
-            this.bounds = new BoundingRectangle(position.X, position.Y,32,14);
+            bounds = new BoundingRectangle(position.X, position.Y,32,14);
         }
         /// <summary>
         /// Loads the sprite texture using the provided ContentManager
