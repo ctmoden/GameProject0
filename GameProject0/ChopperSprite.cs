@@ -65,7 +65,7 @@ namespace GameProject0
         /// </summary>
         public Vector2 Position => position;
         /// <summary>
-        /// property to detect if missile has hit the chopper
+        /// FIXME property to detect if missile has hit the chopper
         /// </summary>
         private bool hit = false;
         /// <summary>

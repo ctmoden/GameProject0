@@ -24,10 +24,7 @@ namespace GameProject0
         private Texture2D texture;
 
         private const int PIXEL_SPEED = 150;
-        /// <summary>
-        /// FIXME debug var for tracking coin pos
-        /// </summary>
-        public Vector2 Position => position;
+        
 
         //private BoundingRectangle bounds;
 
@@ -105,7 +102,6 @@ namespace GameProject0
             bounds.Center.Y += 9;
             if (position.Y > Constants.GAME_HEIGHT || Collided)
             {
-                //position += new Vector2(0, 0);
                 position = new Vector2((float)rand.NextDouble() * Constants.GAME_WIDTH, (float)rand.NextDouble() * Constants.GAME_HEIGHT - Constants.GAME_HEIGHT);
                 bounds.Center = position;
                 Collided = false;
