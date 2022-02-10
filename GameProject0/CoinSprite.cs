@@ -33,7 +33,7 @@ namespace GameProject0
 
         private BoundingCircle bounds;
 
-        public bool Collected { get; set; } = false;
+        public bool Collided { get; set; } = false;
         /// <summary>
         /// lamda syntax for a getter
         /// </summary>
@@ -73,7 +73,6 @@ namespace GameProject0
         /// <param name="spriteBatch">The spritebatch to render with</param>
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-            if (Collected) return;
             animationTimer += gameTime.ElapsedGameTime.TotalSeconds;
 
             if (animationTimer > ANIMATION_SPEED)
@@ -104,13 +103,14 @@ namespace GameProject0
             //FIXME had to add offsets to coins.  Why is center not aligned with coin?
             bounds.Center.X += 8;
             bounds.Center.Y += 9;
-            if (position.Y > Constants.GAME_HEIGHT)
+            if (position.Y > Constants.GAME_HEIGHT || Collided)
             {
                 //position += new Vector2(0, 0);
                 position = new Vector2((float)rand.NextDouble() * Constants.GAME_WIDTH, (float)rand.NextDouble() * Constants.GAME_HEIGHT - Constants.GAME_HEIGHT);
                 bounds.Center = position;
-
+                Collided = false;
             }
+            
             
         }
     }

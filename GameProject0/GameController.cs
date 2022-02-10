@@ -90,7 +90,15 @@ namespace GameProject0
                 Exit();
             // TODO: Add your update logic here
             chopper.Update(gameTime);
-            foreach (var coin in coins) coin.Update(gameTime);
+            foreach (var coin in coins)
+            {
+                if (coin.Bounds.CollidesWith(chopper.Bounds))
+                {
+                    coin.Collided = true;
+                    coinCount++;
+                }
+                coin.Update(gameTime);
+            }
             foreach (var missile in missiles) missile.Update(gameTime);
             base.Update(gameTime);
         }
@@ -126,7 +134,7 @@ namespace GameProject0
             spriteBatch.DrawString(bangers, "Press esc or q to quit", new Vector2(270, 80), Color.Black,0f,new Vector2(),.50f,SpriteEffects.None,0);
             */
             //spriteBatch.DrawString(bangers, $"Width: {GraphicsDevice.Viewport.Width}", new Vector2(2, 2), Color.Gold);
-            //spriteBatch.DrawString(bangers, $"height: {GraphicsDevice.Viewport.Height}", new Vector2(200, 200), Color.Gold);
+            spriteBatch.DrawString(bangers, $"Coins Collected: {coinCount}", new Vector2(10, 10), Color.Gold);
             //drawing four clouds
             chopper.Draw(gameTime, spriteBatch);
             #region chopper bounding region debugging
