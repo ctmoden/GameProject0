@@ -35,23 +35,17 @@ namespace GameProject0
         /// lamda syntax for a getter
         /// </summary>
         public BoundingCircle Bounds => bounds;
-
-        /// <summary>
-        /// lamda syntax for a getter
-        /// </summary>
-        //public BoundingRectangle Bounds => bounds;
         /// <summary>
         /// Creates a new coin sprite
         /// </summary>
         /// <param name="position">The position of the sprite in the game</param>
-        public CoinSprite(Vector2 position)
+        public CoinSprite()
         {
-            this.position = position;
+            position = HelperMethods.RandomVectGenerator();
             //recenters bounding circle backwards by 8.  Moves center down
             //not that expensive when in constructor, if they were moving like the ghost then update in drawing method
             //need to be -8 to shift backwards 
-            this.bounds = new BoundingCircle(position - new Vector2(-8, -8), 8);
-            //this.bounds = new BoundingRectangle(position, 16,16);
+            bounds = new BoundingCircle(position - new Vector2(-8, -8), 8);
         }
 
         /// <summary>
