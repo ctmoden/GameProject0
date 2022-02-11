@@ -57,6 +57,7 @@ namespace GameProject0
                 new MissileSprite(),
                 new MissileSprite(),
                 new MissileSprite(),
+                new MissileSprite(),
                 new MissileSprite()
             };
             clouds = new CloudSprite[]
@@ -65,7 +66,9 @@ namespace GameProject0
                 new CloudSprite(),
                 new CloudSprite(),
                 new CloudSprite(),
+                new CloudSprite(),
                 new CloudSprite()
+
             };
             base.Initialize();
         }

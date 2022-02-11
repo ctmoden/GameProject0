@@ -5,6 +5,9 @@ using Microsoft.Xna.Framework;
 
 namespace GameProject0.Collisions
 {
+    /// <summary>
+    /// Bounding rectangle of a sprite
+    /// </summary>
     public struct BoundingRectangle
     {
         public float X;

@@ -33,7 +33,7 @@ namespace GameProject0
         /// When clouds hit the bottom of the screen, they are redrawn above screen
         /// in a random position and start moving down at a random velocity
         /// </summary>
-        /// <param name="stop"></param>
+        /// <param name="stop">bool param to indicate if game has stopped</param>
         public void Update(bool stop)
         {
             if (!stop)
@@ -49,10 +49,14 @@ namespace GameProject0
                 position += new Vector2(0, 0);
             }
         }
-
+        /// <summary>
+        /// Draw sprite from atlas
+        /// </summary>
+        /// <param name="gameTime"></param>
+        /// <param name="spriteBatch"></param>
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(atlas, position, new Rectangle(80, 32, 16, 16), Color.White, 0f, new Vector2(8, 8), 7, SpriteEffects.None, 0);//, 1, new Vector2(100,100), 100,SpriteEffects.None, 1);
+            spriteBatch.Draw(atlas, position, new Rectangle(80, 32, 16, 16), Color.White, 0f, new Vector2(8, 8), 7, SpriteEffects.None, 0);
 
         }
     }

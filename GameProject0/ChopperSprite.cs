@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-
 using Microsoft.Xna;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -64,10 +63,12 @@ namespace GameProject0
         /// Position of chopper
         /// </summary>
         public Vector2 Position => position;
-
+        /// <summary>
+        /// private backing variable for Hit property
+        /// </summary>
         private bool hit => Hit;
         /// <summary>
-        /// FIXME property to detect if missile has hit the chopper
+        /// Property to detect if missile has hit the chopper
         /// </summary>
         public bool Hit = false;
         /// <summary>
@@ -94,8 +95,8 @@ namespace GameProject0
             keyboardState = Keyboard.GetState();
             if (!hit)
             {
-                if (keyboardState.IsKeyDown(Keys.Left)) position += new Vector2((float)-2.5, 0);
-                if (keyboardState.IsKeyDown(Keys.Right)) position += new Vector2((float)2.5, 0);
+                if (keyboardState.IsKeyDown(Keys.Left) || keyboardState.IsKeyDown(Keys.A)) position += new Vector2((float)-3.5, 0);
+                if (keyboardState.IsKeyDown(Keys.Right) || keyboardState.IsKeyDown(Keys.D)) position += new Vector2((float)3.5, 0);
             }
             //FIXME add keys for wasd and or up/down arrows?
             //recenter bounding region as chopper moves
