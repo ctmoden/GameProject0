@@ -17,8 +17,8 @@ namespace GameProject0
         private MissileSprite[] missiles;
         private CloudSprite[] clouds;
         private SpriteFont bangers;
-        private Texture2D atlas;
         private Texture2D ball;
+        private Texture2D explosion;
         private Texture2D rec;
         private static int coinCount = 0;
         private static int hitCount = 0;
@@ -51,8 +51,6 @@ namespace GameProject0
             };
             missiles = new MissileSprite[]
             {
-                //new MissileSprite(new Vector2((float)rand.NextDouble() * Constants.GAME_WIDTH, (float)rand.NextDouble() * Constants.GAME_WIDTH - Constants.GAME_WIDTH)),
-                //new MissileSprite(new Vector2((float)rand.NextDouble() * Constants.GAME_WIDTH, (float)rand.NextDouble() * Constants.GAME_WIDTH - Constants.GAME_WIDTH))
                 new MissileSprite(),
                 new MissileSprite(),
                 new MissileSprite(),
@@ -82,6 +80,7 @@ namespace GameProject0
             bangers = Content.Load<SpriteFont>("bangers");
             ball = Content.Load<Texture2D>("ball");
             rec = Content.Load<Texture2D>("Water32Frames8x4");
+            explosion = Content.Load<Texture2D>("explosion0");
         }
         /// <summary>
         /// updates game as it is rendered, updates animated chopper and looks for exit input
@@ -138,10 +137,10 @@ namespace GameProject0
             foreach (var missile in missiles)
             {
                 #region missile bounding region debugging
-                
+                /*
                 var rectM = new Rectangle((int)missile.Bounds.X, (int)missile.Bounds.Y,
                     (int)missile.Bounds.Height, (int)missile.Bounds.Width);
-                spriteBatch.Draw(rec, rectM, Color.White);
+                spriteBatch.Draw(rec, rectM, Color.White);*/
                 #endregion missile bounding region debugging
                 missile.Draw(gameTime, spriteBatch);
             }
@@ -154,13 +153,19 @@ namespace GameProject0
             chopper.Draw(gameTime, spriteBatch);
             if (chopper.Hit)
             {
-                EndGame();
+                var rectE = new Rectangle((int)chopper.Bounds.X, (int)chopper.Bounds.Y,
+                    128, 128);
+                spriteBatch.Draw(explosion, new Vector2(chopper.Position.X-64, chopper.Position.Y-64), new Rectangle(0, 0, 128, 128), Color.White);
+                //spriteBatch.Draw(explosion, new Vector2(chopper.Position.X, chopper.Position.Y),
+                    //rectE, Color.White, 0f, new Vector2(64, 64), 10f, SpriteEffects.None, 0);
+                spriteBatch.DrawString(bangers, $"You got shot down!!  Press ecs to restart game", new Vector2(200, 200), Color.DarkRed, 0f, new Vector2(), .5f, SpriteEffects.None, 0);
+
             }
             #region chopper bounding region debugging
-            
+            /*
             var rectC = new Rectangle((int)chopper.Bounds.X,(int)chopper.Bounds.Y,
                     (int)chopper.Bounds.Height, (int)chopper.Bounds.Width);
-            spriteBatch.Draw(rec, rectC, Color.White);           
+            spriteBatch.Draw(rec, rectC, Color.White);*/
             #endregion chopper bounding region debugging
             spriteBatch.End();
             base.Draw(gameTime);
@@ -172,8 +177,7 @@ namespace GameProject0
         /// </summary>
         private void EndGame()
         {
-            spriteBatch.DrawString(bangers, $"Coins Collected: {coinCount}", new Vector2(10, 10), Color.Gold, 0f, new Vector2(), .5f, SpriteEffects.None, 0);
-
+            
         }
     }
 }
