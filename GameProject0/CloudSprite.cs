@@ -33,13 +33,20 @@ namespace GameProject0
         /// When clouds hit the bottom of the screen, they are redrawn above screen
         /// in a random position and start moving down at a random velocity
         /// </summary>
-        /// <param name="gameTime"></param>
-        public void Update(GameTime gameTime)
+        /// <param name="stop"></param>
+        public void Update(bool stop)
         {
-            position += HelperMethods.RandomYVelGenerator(2, 5);
-            if(position.Y > Constants.GAME_HEIGHT)
+            if (!stop)
             {
-                position = HelperMethods.RandomVectGenerator();
+                position += HelperMethods.RandomYVelGenerator(2, 5);
+                if (position.Y > Constants.GAME_HEIGHT)
+                {
+                    position = HelperMethods.RandomVectGenerator();
+                }
+            }
+            else
+            {
+                position += new Vector2(0, 0);
             }
         }
 

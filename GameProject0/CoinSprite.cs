@@ -84,19 +84,27 @@ namespace GameProject0
         ///     if the viewport is 
         /// </summary>
         /// <param name="gameTime"></param>
-        public void Update(GameTime gameTime)
+        public void Update(bool stop)
         {
-            position += HelperMethods.RandomYVelGenerator(2, 4);
-            bounds.Center = position;
-            //FIXME had to add offsets to coins.  Why is center not aligned with coin?
-            bounds.Center.X += 8;
-            bounds.Center.Y += 9;
-            if (position.Y > Constants.GAME_HEIGHT || Collided)
+            if (!stop)
             {
-                position = HelperMethods.RandomVectGenerator();
+                position += HelperMethods.RandomYVelGenerator(2, 4);
                 bounds.Center = position;
-                Collided = false;
-            }            
+                //FIXME had to add offsets to coins.  Why is center not aligned with coin?
+                bounds.Center.X += 8;
+                bounds.Center.Y += 9;
+                if (position.Y > Constants.GAME_HEIGHT || Collided)
+                {
+                    position = HelperMethods.RandomVectGenerator();
+                    bounds.Center = position;
+                    Collided = false;
+                }
+
+            }
+            else
+            {
+                position += new Vector2(0, 0);
+            }
         }
     }
 }

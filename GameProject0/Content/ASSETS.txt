@@ -8,4 +8,8 @@ Content/coins.png - created by puddin of OpenGameArt.org (https://opengameart.or
 
 Content/missile00.png - created by MSavioti on OpenGameArt.org (https://opengameart.org/content/missile-32x32) and released under public domain.
 
-Content/Water32Frames8x4.png - created by Lee Davis on OpenGameArt.com (https://opengameart.org/content/flowing-water) and released under public domain.
+Content/Water32Frames8x4.png - created by Lee Davis on OpenGameArt.org (https://opengameart.org/content/flowing-water) and released under public domain.
+
+Content/explosion0.png - created by GamingProgrammingSlave on OpenGameArt.org (https://opengameart.org/content/explosions) and released under public domain.
+
+

@@ -100,17 +100,18 @@ namespace GameProject0
                     coin.Collided = true;
                     coinCount++;
                 }
-                coin.Update(gameTime);
+                coin.Update(chopper.Hit);
             }
             foreach (var missile in missiles)
             {
                 if (missile.Bounds.CollidesWith(chopper.Bounds))
                 {
                     hitCount++;
+                    chopper.Hit = true;
                 }
-                missile.Update(gameTime);
+                missile.Update(chopper.Hit);
             }
-            foreach (var cloud in clouds) cloud.Update(gameTime);
+            foreach (var cloud in clouds) cloud.Update(chopper.Hit);
             base.Update(gameTime);
         }
         /// <summary>
@@ -150,7 +151,11 @@ namespace GameProject0
             }
             spriteBatch.DrawString(bangers, $"Coins Collected: {coinCount}", new Vector2(10, 10), Color.Gold, 0f, new Vector2(), .5f, SpriteEffects.None, 0);
             spriteBatch.DrawString(bangers, $"Hit Count: {hitCount}", new Vector2(30, 30), Color.Gold,0f,new Vector2(),.5f,SpriteEffects.None,0);
-            chopper.Draw(gameTime, spriteBatch);            
+            chopper.Draw(gameTime, spriteBatch);
+            if (chopper.Hit)
+            {
+                EndGame();
+            }
             #region chopper bounding region debugging
             
             var rectC = new Rectangle((int)chopper.Bounds.X,(int)chopper.Bounds.Y,
@@ -159,6 +164,16 @@ namespace GameProject0
             #endregion chopper bounding region debugging
             spriteBatch.End();
             base.Draw(gameTime);
+        }
+        /// <summary>
+        /// When chopper is hit, display end game message 
+        /// and draw explosion sprite over the chopper
+        /// stop chopper movements?
+        /// </summary>
+        private void EndGame()
+        {
+            spriteBatch.DrawString(bangers, $"Coins Collected: {coinCount}", new Vector2(10, 10), Color.Gold, 0f, new Vector2(), .5f, SpriteEffects.None, 0);
+
         }
     }
 }

@@ -42,17 +42,24 @@ namespace GameProject0
         /// </summary>
         /// <param name="gameTime"></param>
         
-        public void Update(GameTime gameTime)//needs to take in position on update
+        public void Update(bool stop)//needs to take in position on update
         {
-            //position += HelperMethods.RandomYVelGenerator(7, 8);
-            position += new Vector2(0, 1);
-            if (position.Y > Constants.GAME_HEIGHT)
+            if (!stop)
             {
-                position = HelperMethods.RandomVectGenerator();
-                //position = new Vector2(100f, 100f);
+                //position += HelperMethods.RandomYVelGenerator(7, 8);
+                position += new Vector2(0, 1);
+                if (position.Y > Constants.GAME_HEIGHT)
+                {
+                    position = HelperMethods.RandomVectGenerator();
+                    //position = new Vector2(100f, 100f);
+                }
+                bounds.X = position.X - 7;
+                bounds.Y = position.Y - 19;
             }
-            bounds.X = position.X-7;
-            bounds.Y = position.Y-19;
+            else
+            {
+                position += new Vector2(0, 0);
+            }
         }
         /// <summary>
         /// Draws sprite using supplied sprite batch
