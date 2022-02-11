@@ -94,8 +94,8 @@ namespace GameProject0
             keyboardState = Keyboard.GetState();
             if (!hit)
             {
-                if (keyboardState.IsKeyDown(Keys.Left)) position += new Vector2(-2, 0);
-                if (keyboardState.IsKeyDown(Keys.Right)) position += new Vector2(2, 0);
+                if (keyboardState.IsKeyDown(Keys.Left)) position += new Vector2((float)-2.5, 0);
+                if (keyboardState.IsKeyDown(Keys.Right)) position += new Vector2((float)2.5, 0);
             }
             //FIXME add keys for wasd and or up/down arrows?
             //recenter bounding region as chopper moves
@@ -155,9 +155,7 @@ namespace GameProject0
                         if (animationRow > 7) animationRow = 0;
                     }
                     animationTimer -= 0.03;
-                    //reset timer
                 }
-
             }
             //rectangle updated between spriteBatch begin and end
             //rectangle is new "chunk" of helo image that represents a different part 

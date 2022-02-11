@@ -40,14 +40,14 @@ namespace GameProject0
         /// QUESTIONS: how to change timing of missiles firing at chopper?  Game time snapshots + random offset?
         ///FIXME add param to stop game?
         /// </summary>
-        /// <param name="gameTime"></param>
+        /// <param name="stop">variable for detecting stop of gameplay</param>
         
         public void Update(bool stop)//needs to take in position on update
         {
             if (!stop)
             {
-                //position += HelperMethods.RandomYVelGenerator(7, 8);
-                position += new Vector2(0, 1);
+                position += HelperMethods.RandomYVelGenerator(7, 8);
+                //position += new Vector2(0, 1);
                 if (position.Y > Constants.GAME_HEIGHT)
                 {
                     position = HelperMethods.RandomVectGenerator();

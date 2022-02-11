@@ -12,4 +12,4 @@ Content/Water32Frames8x4.png - created by Lee Davis on OpenGameArt.org (https://
 
 Content/explosion0.png - created by GamingProgrammingSlave on OpenGameArt.org (https://opengameart.org/content/explosions) and released under public domain.
 
-
+I built upon classes used in previous tutorials, specifically CoinSprite.cs, Collisions/BoundingCircle.cs, Collisions/BoundingRectangle.cs, and Collisions/CollisionHelper.cs

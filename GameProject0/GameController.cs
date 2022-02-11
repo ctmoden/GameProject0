@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System;
 
 namespace GameProject0
 {
@@ -22,6 +23,7 @@ namespace GameProject0
         private Texture2D rec;
         private static int coinCount = 0;
         private static int hitCount = 0;
+        private string playTime = "";
 
         public GameController()
         {
@@ -149,16 +151,28 @@ namespace GameProject0
                 cloud.Draw(gameTime, spriteBatch);
             }
             spriteBatch.DrawString(bangers, $"Coins Collected: {coinCount}", new Vector2(10, 10), Color.Gold, 0f, new Vector2(), .5f, SpriteEffects.None, 0);
-            spriteBatch.DrawString(bangers, $"Hit Count: {hitCount}", new Vector2(30, 30), Color.Gold,0f,new Vector2(),.5f,SpriteEffects.None,0);
+            switch (chopper.Hit)
+            {
+                case false:
+                    spriteBatch.DrawString(bangers, $"Game Time: {gameTime.TotalGameTime.TotalSeconds}", new Vector2(30, 30), Color.Gold, 0f, new Vector2(), .5f, SpriteEffects.None, 0);
+                    break;
+                case true:
+                    spriteBatch.DrawString(bangers, $"Game Time: {gameTime.TotalGameTime.TotalSeconds}", new Vector2(30, 30), Color.Transparent, 0f, new Vector2(), .5f, SpriteEffects.None, 0);
+                    break;
+
+            }
             chopper.Draw(gameTime, spriteBatch);
             if (chopper.Hit)
             {
-                var rectE = new Rectangle((int)chopper.Bounds.X, (int)chopper.Bounds.Y,
-                    128, 128);
+
+                if (playTime.Length == 0) playTime = Math.Round(gameTime.TotalGameTime.TotalSeconds,2).ToString();
+                
                 spriteBatch.Draw(explosion, new Vector2(chopper.Position.X-64, chopper.Position.Y-64), new Rectangle(0, 0, 128, 128), Color.White);
                 //spriteBatch.Draw(explosion, new Vector2(chopper.Position.X, chopper.Position.Y),
                     //rectE, Color.White, 0f, new Vector2(64, 64), 10f, SpriteEffects.None, 0);
                 spriteBatch.DrawString(bangers, $"You got shot down!!  Press ecs to restart game", new Vector2(200, 200), Color.DarkRed, 0f, new Vector2(), .5f, SpriteEffects.None, 0);
+                
+                spriteBatch.DrawString(bangers, $"Survived: {playTime} seconds!", new Vector2(30, 30), Color.Gold, 0f, new Vector2(), .5f, SpriteEffects.None, 0);
 
             }
             #region chopper bounding region debugging

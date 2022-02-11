@@ -1,0 +1,3 @@
+﻿Use the left and right arrow keys to move the chopper across the screen horizontally.
+
+Collide with the coin sprites to collect coins while avoiding missile sprite volleys trying to shoot you down!
