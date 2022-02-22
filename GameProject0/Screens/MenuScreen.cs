@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace GameProject0
+namespace GameProject0.Screens
 {
     /// <summary>
     /// Class is responsible for loading main menu screen and gameplay screen
@@ -19,7 +19,8 @@ namespace GameProject0
         when esc or quit is pressed while on title screen, shut the program down
         use content.unload() to unload screens
 
-        might have to split game controller logic and put loading screen in here
+        put menu screen logic in here
+        other methods needed besides 
          */
     }
 }

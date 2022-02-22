@@ -5,11 +5,14 @@ using System;
 
 namespace GameProject0
 {
+    
     /// <summary>
     /// Controls game loop
+    /// TODO have an enum for different gameplay screens?  Use case statements to update/initialize
     /// </summary>
     public class GameController : Game
     {
+        private GameState gameState = GameState.Menu;//initially load menu
         //FIXME group private fields into regions
         private GraphicsDeviceManager graphics;
         private SpriteBatch spriteBatch;
@@ -36,6 +39,14 @@ namespace GameProject0
         /// </summary>
         protected override void Initialize()
         {
+            
+            switch (gameState)
+            {
+                case GameState.Menu:
+                    break;
+                case GameState.GamePlay:
+                    break;
+            }
             /*
             chopper = new ChopperSprite()
             {
@@ -77,8 +88,16 @@ namespace GameProject0
         /// </summary>
         protected override void LoadContent()
         {
+            switch (gameState)
+            {
+                case GameState.Menu:
+                    break;
+                case GameState.GamePlay:
+                    break;
+            }
+            //load content 
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            //FIXME only load on certian screen
+            
             foreach (var coin in coins) coin.LoadContent(Content);
             foreach (var missile in missiles) missile.LoadContent(Content);
             chopper.LoadContent(Content);
@@ -94,10 +113,17 @@ namespace GameProject0
         /// <param name="gameTime"></param>
         protected override void Update(GameTime gameTime)
         {
+            switch (gameState)
+            {
+                case GameState.Menu:
+                    break;
+                case GameState.GamePlay:
+                    break;
+            }
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape) 
                 || Keyboard.GetState().IsKeyDown(Keys.Q))
                 Exit();
-            //if new 
+            //if enter is pressed, load gameplay screen
             chopper.Update(gameTime);
             foreach (var coin in coins)
             {
