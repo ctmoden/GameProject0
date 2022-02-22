@@ -78,6 +78,7 @@ namespace GameProject0
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
+            //FIXME only load on certian screen
             foreach (var coin in coins) coin.LoadContent(Content);
             foreach (var missile in missiles) missile.LoadContent(Content);
             chopper.LoadContent(Content);
@@ -96,6 +97,7 @@ namespace GameProject0
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape) 
                 || Keyboard.GetState().IsKeyDown(Keys.Q))
                 Exit();
+            //if new 
             chopper.Update(gameTime);
             foreach (var coin in coins)
             {
