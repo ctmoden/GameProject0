@@ -11,7 +11,7 @@ namespace GameProject0.Screens
     public class MenuScreen
     {
         /*
-         when game initiall loads, load title screen
+         when game initialy loads, load title screen
         when enter is hit, load new game controller and 
         unload title screen
         when esc is hit after game is done, unload all game assets
