@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
-
+using GameProject0.Screens;
 namespace GameProject0
 {
     
@@ -13,6 +13,8 @@ namespace GameProject0
     public class GameController : Game
     {
         private GameState gameState = GameState.Menu;//initially load menu
+        private MenuScreen menuScreen;
+        private GamePlayScreen gameScreen;//TODO send in states to screens so they can load differently?  Pass in game controller to these objects 
         //FIXME group private fields into regions
         private GraphicsDeviceManager graphics;
         private SpriteBatch spriteBatch;
