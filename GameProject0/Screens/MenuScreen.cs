@@ -25,7 +25,7 @@ namespace GameProject0.Screens
     {
         
         private GameController controller;
-        private GraphicsDeviceManager graphics;
+        private GraphicsDeviceManager graphics;//FIXME need this?
         private ChopperSprite chopper;
         private SpriteBatch spriteBatch;
         private SpriteFont bangers;
@@ -83,10 +83,8 @@ namespace GameProject0.Screens
             }
             if (keyboardState.IsKeyDown(Keys.Enter))
             {
-                switchScreen = true;
-                unload();
+                switchScreen = true;              
             }
-            //switchScreen = false;
         }
 
         public void Draw(GameTime gameTime)
@@ -99,15 +97,6 @@ namespace GameProject0.Screens
             chopper.Draw(gameTime, spriteBatch,true);
             foreach (var cloud in clouds) cloud.Draw(gameTime, spriteBatch);
             spriteBatch.End();
-        }
-
-
-        /// <summary>
-        /// TODO how to unload?
-        /// </summary>
-        private void unload()
-        {
-            controller.Content.Unload();
         }
     }
 }

@@ -44,11 +44,10 @@ namespace GameProject0
         /// </summary>
         protected override void Initialize()
         {
-
             menuScreen = new MenuScreen(this);
             gameScreen = new GamePlayScreen(this);
-            menuScreen.Initialize();
             gameScreen.Initialize();
+            menuScreen.Initialize();
             /*chopper = new ChopperSprite();           
             coins = new CoinSprite[]
             {
@@ -84,9 +83,8 @@ namespace GameProject0
         /// </summary>
         protected override void LoadContent()
         {
-            
+            gameScreen.LoadContent();
             menuScreen.LoadContent();                
-            gameScreen.LoadContent();          
             //load content 
             spriteBatch = new SpriteBatch(GraphicsDevice);
             /*
@@ -107,8 +105,7 @@ namespace GameProject0
         {
             bool switchScreen = false;
             switch (gameState)
-            {
-                
+            {             
                 case GameState.Menu:
                     menuScreen.Update(gameTime,out switchScreen);
                     break;
@@ -119,7 +116,7 @@ namespace GameProject0
             if (switchScreen)
             {             
                 if (gameState == GameState.GamePlay) gameState = GameState.Menu;
-                if (gameState == GameState.Menu) gameState = GameState.GamePlay;
+                else if (gameState == GameState.Menu) gameState = GameState.GamePlay;
 
             }
             /*

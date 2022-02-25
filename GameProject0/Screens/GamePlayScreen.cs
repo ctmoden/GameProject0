@@ -14,6 +14,8 @@ namespace GameProject0.Screens
         private KeyboardState keyboardState;
         private SpriteFont bangers;
 
+        private ChopperSprite chopper;
+
 
         public GamePlayScreen(GameController controller)
         {
@@ -22,12 +24,17 @@ namespace GameProject0.Screens
         }
         public void Initialize()
         {
-            spriteBatch = new SpriteBatch(controller.GraphicsDevice);//FIXME is this right?
+            chopper = new ChopperSprite()
+            {
+                MenuPosition = new Vector2(275, 400),
+                Direction = Direction.Right
+            };
+            //spriteBatch = new SpriteBatch(controller.GraphicsDevice);//FIXME is this right?
 
         }
         public void LoadContent()
         {
-            
+            chopper.LoadContent(controller.Content);//FIXME is this right?
             spriteBatch = new SpriteBatch(controller.GraphicsDevice);//FIXME is this right?
             bangers = controller.Content.Load<SpriteFont>("bangers");
         }
@@ -37,30 +44,21 @@ namespace GameProject0.Screens
             keyboardState = Keyboard.GetState();
             if (keyboardState.IsKeyDown(Keys.Escape) || keyboardState.IsKeyDown(Keys.Q))
             {
-                switchScreen = true;
-                unload();//TODO how to switch back to other screen?  out param?
+                switchScreen = true;             
             }
             else
             {
                 switchScreen = false;
             }
+            chopper.Update(gameTime);
         }
         public void Draw(GameTime gameTime)
         {
             controller.GraphicsDevice.Clear(Color.CornflowerBlue);//this will draw, but string will not
-
             spriteBatch.Begin();
-            spriteBatch.DrawString(bangers, "Test Screen", new Vector2(250, 250), Color.Black);
-            
+            chopper.Draw(gameTime, spriteBatch, true);
+            spriteBatch.DrawString(bangers, "Test Screen", new Vector2(250, 250), Color.Black);           
             spriteBatch.End();
         }
-        /// <summary>
-        /// TODO how to unload?
-        /// </summary>
-        private void unload()
-        {
-            controller.Content.Unload();
-        }
-
     }
 }
