@@ -92,6 +92,12 @@
 /processorParam:TextureFormat=Color
 /build:Output.png
 
+#begin Pickup_Coin15.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Pickup_Coin15.wav
+
 #begin Water32Frames8x4.png
 /importer:TextureImporter
 /processor:TextureProcessor

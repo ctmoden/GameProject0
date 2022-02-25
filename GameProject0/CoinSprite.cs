@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
 using GameProject0.Collisions;//using new namespace to access struct
@@ -12,7 +13,7 @@ namespace GameProject0
 
     public class CoinSprite
     {
-        
+        private SoundEffect coinSound;
         private const float ANIMATION_SPEED = 0.1f;
 
         private double animationTimer;
@@ -55,6 +56,7 @@ namespace GameProject0
         public void LoadContent(ContentManager content)
         {
             texture = content.Load<Texture2D>("coins");
+            coinSound = content.Load<SoundEffect>("Pickup_Coin15");
         }
 
         /// <summary>
@@ -95,6 +97,7 @@ namespace GameProject0
                 bounds.Center.Y += 9;
                 if (position.Y > Constants.GAME_HEIGHT || Collided)
                 {
+                    if (Collided) coinSound.Play();
                     position = HelperMethods.RandomVectGenerator();
                     bounds.Center = position;
                     Collided = false;
