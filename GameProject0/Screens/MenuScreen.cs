@@ -25,16 +25,15 @@ namespace GameProject0.Screens
     {
         
         private GameController controller;
-        private GraphicsDeviceManager graphics;//FIXME need this?
         private ChopperSprite chopper;
         private SpriteBatch spriteBatch;
         private SpriteFont bangers;
         private CloudSprite[] clouds;
         private KeyboardState keyboardState;
-
-
-
-
+        /// <summary>
+        /// Constructor for menu, sets parent game controller
+        /// </summary>
+        /// <param name="controller"></param>
         public MenuScreen(GameController controller)
         {
             this.controller = controller;
