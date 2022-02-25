@@ -119,31 +119,7 @@ namespace GameProject0
                 else if (gameState == GameState.Menu) gameState = GameState.GamePlay;
 
             }
-            /*
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape) 
-                || Keyboard.GetState().IsKeyDown(Keys.Q))
-                Exit();
-            //if enter is pressed, load gameplay screen
-            chopper.Update(gameTime);
-            foreach (var coin in coins)
-            {
-                if (coin.Bounds.CollidesWith(chopper.Bounds))
-                {
-                    coin.Collided = true;
-                    coinCount++;
-                }
-                coin.Update(chopper.Hit);
-            }
-            foreach (var missile in missiles)
-            {
-                if (missile.Bounds.CollidesWith(chopper.Bounds))
-                {
-                    hitCount++;
-                    chopper.Hit = true;
-                }
-                missile.Update(chopper.Hit);
-            }
-            foreach (var cloud in clouds) cloud.Update(chopper.Hit);*/
+           
             base.Update(gameTime);
         }
         /// <summary>

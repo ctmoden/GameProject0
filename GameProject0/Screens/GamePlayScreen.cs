@@ -85,7 +85,9 @@ namespace GameProject0.Screens
             keyboardState = Keyboard.GetState();
             if (keyboardState.IsKeyDown(Keys.Escape) || keyboardState.IsKeyDown(Keys.Q))
             {
-                switchScreen = true;             
+                switchScreen = true;
+                restartGame();
+                return;
             }
             else
             {
@@ -112,6 +114,10 @@ namespace GameProject0.Screens
             }
             foreach (var cloud in clouds) cloud.Update(chopper.Hit);
         }
+        /// <summary>
+        /// Draws gameplay
+        /// </summary>
+        /// <param name="gameTime"></param>
         public void Draw(GameTime gameTime)
         {
             controller.GraphicsDevice.Clear(Color.CornflowerBlue);//this will draw, but string will not
@@ -160,6 +166,11 @@ namespace GameProject0.Screens
             #endregion chopper bounding region debugging
             //spriteBatch.DrawString(bangers, "Test Screen", new Vector2(250, 250), Color.Black);           
             spriteBatch.End();
+        }
+
+        private void restartGame()
+        {
+
         }
     }
 }
