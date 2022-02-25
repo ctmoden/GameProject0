@@ -25,6 +25,7 @@ namespace GameProject0.Screens
         private static int coinCount;
         private static int hitCount;
         private string playTime = "";
+        //tracks total seconds elapsed from beginning of each game start
         private float gameSeconds = 0.0f;
         /// <summary>
         /// Constructor for game screen, sets parent game controller
@@ -32,14 +33,18 @@ namespace GameProject0.Screens
         /// <param name="controller"></param>
         public GamePlayScreen(GameController controller)
         {
-            this.controller = controller;
-            
-            
+            this.controller = controller;           
         }
+        /// <summary>
+        /// Sets up game 
+        /// </summary>
         public void Initialize()
         {
             setupGame();
         }
+        /// <summary>
+        /// Loads content for Gameplay screen
+        /// </summary>
         public void LoadContent()
         {
             chopper.LoadContent(controller.Content);//FIXME is this right?
@@ -63,10 +68,10 @@ namespace GameProject0.Screens
             if (keyboardState.IsKeyDown(Keys.Escape) || keyboardState.IsKeyDown(Keys.Q))
             {
                 switchScreen = true;
-                gameSeconds = 0.0f;//freezes gameplay time
+                gameSeconds = 0.0f;
                 setupGame();
                 LoadContent();
-                Thread.Sleep(200);
+                Thread.Sleep(400);//freezes transition so esc key is not detected in menu screen
                 return;
             }
             else
@@ -95,7 +100,7 @@ namespace GameProject0.Screens
             foreach (var cloud in clouds) cloud.Update(chopper.Hit);
         }
         /// <summary>
-        /// Draws gameplay
+        /// Draws gameplay, asset movement and screen strings depend on state of chopper 
         /// </summary>
         /// <param name="gameTime"></param>
         public void Draw(GameTime gameTime)
@@ -149,14 +154,16 @@ namespace GameProject0.Screens
             //spriteBatch.DrawString(bangers, "Test Screen", new Vector2(250, 250), Color.Black);           
             spriteBatch.End();
         }
-
+        /// <summary>
+        /// sets up game upon first initialization or when game restarts
+        /// </summary>
         private void setupGame()
         {
-            coinCount = 0;//FIXME may want to reinitialize values after game is complete
+            coinCount = 0;
             hitCount = 0;
             playTime = "";
             chopper = new ChopperSprite();
-            //spriteBatch = new SpriteBatch(controller.GraphicsDevice);//FIXME is this right?
+            
             coins = new CoinSprite[]
             {
                 new CoinSprite(),

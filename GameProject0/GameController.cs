@@ -13,10 +13,9 @@ namespace GameProject0
     /// </summary>
     public class GameController : Game
     {
-        private GameState gameState = GameState.Menu;//initially load menu
+        private GameState gameState = GameState.Menu;//initially load menu screen
         private MenuScreen menuScreen;
-        private GamePlayScreen gameScreen;//TODO send in states to screens so they can load differently?  Pass in game controller to these objects 
-        //FIXME group private fields into regions
+        private GamePlayScreen gameScreen;
         private GraphicsDeviceManager graphics;
         
         private SpriteBatch spriteBatch;
@@ -54,7 +53,8 @@ namespace GameProject0
             MediaPlayer.IsRepeating = true;
         }
         /// <summary>
-        /// updates game as it is rendered, updates animated chopper and looks for exit input
+        /// Updates game based on current screen
+        /// 
         /// </summary>
         /// <param name="gameTime"></param>
         protected override void Update(GameTime gameTime)
@@ -66,10 +66,8 @@ namespace GameProject0
                     MediaPlayer.Play(backgroundMusic);
                     menuScreen.Update(gameTime,out switchScreen);
                     break;
-                case GameState.GamePlay:
-                    
-                    gameScreen.Update(gameTime, out switchScreen);
-                    
+                case GameState.GamePlay:                   
+                    gameScreen.Update(gameTime, out switchScreen);                   
                     break;
             }
             if (switchScreen)
@@ -86,8 +84,7 @@ namespace GameProject0
         /// <param name="gameTime"></param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
-            
+            GraphicsDevice.Clear(Color.CornflowerBlue);            
             //TODO use this in other methods
             spriteBatch.Begin();
             switch (gameState)

@@ -78,21 +78,24 @@ namespace GameProject0.Screens
             if(keyboardState.IsKeyDown(Keys.Escape) || keyboardState.IsKeyDown(Keys.Q))
             {
                 switchScreen = false;
-                controller.Exit();//TODO how to switch back to other screen?  out param?
+                controller.Exit();
             }
             if (keyboardState.IsKeyDown(Keys.Enter))
             {
                 switchScreen = true;              
             }
         }
-
+        /// <summary>
+        /// Draws menu screen with gameplay instructions
+        /// </summary>
+        /// <param name="gameTime"></param>
         public void Draw(GameTime gameTime)
         {
             controller.GraphicsDevice.Clear(Color.CornflowerBlue);
             spriteBatch.Begin();
             spriteBatch.DrawString(bangers, "Choppa Fight!!", new Vector2(250, 10), Color.Black);
-            spriteBatch.DrawString(bangers, "Press esc or q to quit, enter to play", new Vector2(270, 80), Color.Black, 0f, new Vector2(), .50f, SpriteEffects.None, 0);
-            spriteBatch.DrawString(bangers, "Press esc or q in game to return to menu screen", new Vector2(270, 150), Color.Black, 0f, new Vector2(), .50f, SpriteEffects.None, 0);
+            spriteBatch.DrawString(bangers, "Press esc or q to quit, enter to play", new Vector2(220, 80), Color.Black, 0f, new Vector2(), .50f, SpriteEffects.None, 0);
+            spriteBatch.DrawString(bangers, "Press esc or q in game to return to menu screen", new Vector2(170, 130), Color.Black, 0f, new Vector2(), .50f, SpriteEffects.None, 0);
             chopper.Draw(gameTime, spriteBatch,true);
             foreach (var cloud in clouds) cloud.Draw(gameTime, spriteBatch);
             spriteBatch.End();

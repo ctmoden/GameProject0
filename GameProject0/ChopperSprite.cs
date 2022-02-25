@@ -136,6 +136,9 @@ namespace GameProject0
             }
             #endregion direction timer
         }
+        /// <summary>
+        /// Update method specific for gameplay
+        /// </summary>
         public void Update()
         {
             keyboardState = Keyboard.GetState();
