@@ -84,18 +84,9 @@ namespace GameProject0
         /// </summary>
         protected override void LoadContent()
         {
-            switch (gameState)
-            {
-                case GameState.Menu:
-                    gameScreen.Unload();
-                    menuScreen.LoadContent();
-                    
-                    break;
-                case GameState.GamePlay:
-                    menuScreen.Unload();
-                    gameScreen.LoadContent();
-                    break;
-            }
+            
+            menuScreen.LoadContent();                
+            gameScreen.LoadContent();          
             //load content 
             spriteBatch = new SpriteBatch(GraphicsDevice);
             /*
@@ -126,7 +117,7 @@ namespace GameProject0
                     break;
             }
             if (switchScreen)
-            {
+            {             
                 if (gameState == GameState.GamePlay) gameState = GameState.Menu;
                 if (gameState == GameState.Menu) gameState = GameState.GamePlay;
 
@@ -166,6 +157,9 @@ namespace GameProject0
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
+            
+            //TODO use this in other methods
+            spriteBatch.Begin();
             switch (gameState)
             {
                 case GameState.Menu:
@@ -175,57 +169,54 @@ namespace GameProject0
                     gameScreen.Draw(gameTime);
                     break;
             }
-            //TODO use this in other methods
-            spriteBatch.Begin();
-            
             //foreach (var coin in coins)
             //{
-                #region coin bounding region debugging
-                /*
-                var rect = new Rectangle((int)(coin.Bounds.Center.X - coin.Bounds.Radius),
-                    (int)(coin.Bounds.Center.Y - coin.Bounds.Radius),
-                    (int)(2*coin.Bounds.Radius), (int)(2*coin.Bounds.Radius));
+            #region coin bounding region debugging
+            /*
+            var rect = new Rectangle((int)(coin.Bounds.Center.X - coin.Bounds.Radius),
+                (int)(coin.Bounds.Center.Y - coin.Bounds.Radius),
+                (int)(2*coin.Bounds.Radius), (int)(2*coin.Bounds.Radius));
 
-                spriteBatch.Draw(ball, rect, Color.White);*/
-            
-                #endregion coin bounding region debugging
-                //coin.Draw(gameTime, spriteBatch);                
+            spriteBatch.Draw(ball, rect, Color.White);*/
+
+            #endregion coin bounding region debugging
+            //coin.Draw(gameTime, spriteBatch);                
             //}
             /*foreach (var missile in missiles)
             {*/
-                #region missile bounding region debugging
-                /*
-                var rectM = new Rectangle((int)missile.Bounds.X, (int)missile.Bounds.Y,
-                    (int)missile.Bounds.Height, (int)missile.Bounds.Width);
-                spriteBatch.Draw(rec, rectM, Color.White);*/
-                #endregion missile bounding region debugging
-               /* missile.Draw(gameTime, spriteBatch);
-            }
-            foreach (var cloud in clouds)
-            {
-                cloud.Draw(gameTime, spriteBatch);
-            }
-            spriteBatch.DrawString(bangers, $"Coins Collected: {coinCount}", new Vector2(10, 10), Color.Gold, 0f, new Vector2(), .5f, SpriteEffects.None, 0);
-            //if chopper is hit, game time is hidden.  If not, make text shows gametime
-            switch (chopper.Hit)
-            {
-                case false:
-                    spriteBatch.DrawString(bangers, $"Game Time: {gameTime.TotalGameTime.TotalSeconds}", new Vector2(30, 30), Color.Gold, 0f, new Vector2(), .5f, SpriteEffects.None, 0);
-                    break;
-                case true:
-                    spriteBatch.DrawString(bangers, $"Game Time: {gameTime.TotalGameTime.TotalSeconds}", new Vector2(30, 30), Color.Transparent, 0f, new Vector2(), .5f, SpriteEffects.None, 0);
-                    break;
-            }
-            /*chopper.Draw(gameTime, spriteBatch);
-            if (chopper.Hit)
-            {
-                if (playTime.Length == 0) playTime = Math.Round(gameTime.TotalGameTime.TotalSeconds,2).ToString();               
-                spriteBatch.Draw(explosion, new Vector2(chopper.Position.X-64, chopper.Position.Y-64), new Rectangle(0, 0, 128, 128), Color.White);
-                //spriteBatch.Draw(explosion, new Vector2(chopper.Position.X, chopper.Position.Y),
-                    //rectE, Color.White, 0f, new Vector2(64, 64), 10f, SpriteEffects.None, 0);
-                spriteBatch.DrawString(bangers, $"You got shot down!!  Press ecs to restart game", new Vector2(200, 200), Color.DarkRed, 0f, new Vector2(), .5f, SpriteEffects.None, 0);               
-                spriteBatch.DrawString(bangers, $"Survived: {playTime} seconds!", new Vector2(30, 30), Color.Gold, 0f, new Vector2(), .5f, SpriteEffects.None, 0);
-            }*/
+            #region missile bounding region debugging
+            /*
+            var rectM = new Rectangle((int)missile.Bounds.X, (int)missile.Bounds.Y,
+                (int)missile.Bounds.Height, (int)missile.Bounds.Width);
+            spriteBatch.Draw(rec, rectM, Color.White);*/
+            #endregion missile bounding region debugging
+            /* missile.Draw(gameTime, spriteBatch);
+         }
+         foreach (var cloud in clouds)
+         {
+             cloud.Draw(gameTime, spriteBatch);
+         }
+         spriteBatch.DrawString(bangers, $"Coins Collected: {coinCount}", new Vector2(10, 10), Color.Gold, 0f, new Vector2(), .5f, SpriteEffects.None, 0);
+         //if chopper is hit, game time is hidden.  If not, make text shows gametime
+         switch (chopper.Hit)
+         {
+             case false:
+                 spriteBatch.DrawString(bangers, $"Game Time: {gameTime.TotalGameTime.TotalSeconds}", new Vector2(30, 30), Color.Gold, 0f, new Vector2(), .5f, SpriteEffects.None, 0);
+                 break;
+             case true:
+                 spriteBatch.DrawString(bangers, $"Game Time: {gameTime.TotalGameTime.TotalSeconds}", new Vector2(30, 30), Color.Transparent, 0f, new Vector2(), .5f, SpriteEffects.None, 0);
+                 break;
+         }
+         /*chopper.Draw(gameTime, spriteBatch);
+         if (chopper.Hit)
+         {
+             if (playTime.Length == 0) playTime = Math.Round(gameTime.TotalGameTime.TotalSeconds,2).ToString();               
+             spriteBatch.Draw(explosion, new Vector2(chopper.Position.X-64, chopper.Position.Y-64), new Rectangle(0, 0, 128, 128), Color.White);
+             //spriteBatch.Draw(explosion, new Vector2(chopper.Position.X, chopper.Position.Y),
+                 //rectE, Color.White, 0f, new Vector2(64, 64), 10f, SpriteEffects.None, 0);
+             spriteBatch.DrawString(bangers, $"You got shot down!!  Press ecs to restart game", new Vector2(200, 200), Color.DarkRed, 0f, new Vector2(), .5f, SpriteEffects.None, 0);               
+             spriteBatch.DrawString(bangers, $"Survived: {playTime} seconds!", new Vector2(30, 30), Color.Gold, 0f, new Vector2(), .5f, SpriteEffects.None, 0);
+         }*/
             #region chopper bounding region debugging
             /*
             var rectC = new Rectangle((int)chopper.Bounds.X,(int)chopper.Bounds.Y,

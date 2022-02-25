@@ -59,7 +59,7 @@ namespace GameProject0.Screens
                 new CloudSprite()
 
             };
-            spriteBatch = new SpriteBatch(controller.GraphicsDevice);
+            //spriteBatch = new SpriteBatch(controller.GraphicsDevice);
         }
         public void LoadContent()
         {
@@ -84,7 +84,7 @@ namespace GameProject0.Screens
             if (keyboardState.IsKeyDown(Keys.Enter))
             {
                 switchScreen = true;
-                Unload();
+                unload();
             }
             //switchScreen = false;
         }
@@ -105,7 +105,7 @@ namespace GameProject0.Screens
         /// <summary>
         /// TODO how to unload?
         /// </summary>
-        public void Unload()
+        private void unload()
         {
             controller.Content.Unload();
         }
