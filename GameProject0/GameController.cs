@@ -48,34 +48,7 @@ namespace GameProject0
             gameScreen = new GamePlayScreen(this);
             gameScreen.Initialize();
             menuScreen.Initialize();
-            /*chopper = new ChopperSprite();           
-            coins = new CoinSprite[]
-            {
-                new CoinSprite(),
-                new CoinSprite(),
-                new CoinSprite(),
-                new CoinSprite(),
-                new CoinSprite()
-            };
-            missiles = new MissileSprite[]
-            {
-                new MissileSprite(),
-                new MissileSprite(),
-                new MissileSprite(),
-                new MissileSprite(),
-                new MissileSprite(),
-                new MissileSprite()
-            };
-            clouds = new CloudSprite[]
-            {
-                new CloudSprite(),
-                new CloudSprite(),
-                new CloudSprite(),
-                new CloudSprite(),
-                new CloudSprite(),
-                new CloudSprite()
-
-            };*/
+            
             base.Initialize();
         }
         /// <summary>
@@ -87,15 +60,7 @@ namespace GameProject0
             menuScreen.LoadContent();                
             //load content 
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            /*
-            foreach (var coin in coins) coin.LoadContent(Content);
-            foreach (var missile in missiles) missile.LoadContent(Content);
-            chopper.LoadContent(Content);
-            foreach (var cloud in clouds) cloud.LoadContent(Content);
-            bangers = Content.Load<SpriteFont>("bangers");
-            ball = Content.Load<Texture2D>("ball");
-            rec = Content.Load<Texture2D>("Water32Frames8x4");
-            explosion = Content.Load<Texture2D>("explosion0");*/
+            
         }
         /// <summary>
         /// updates game as it is rendered, updates animated chopper and looks for exit input
@@ -118,8 +83,7 @@ namespace GameProject0
                 if (gameState == GameState.GamePlay) gameState = GameState.Menu;
                 else if (gameState == GameState.Menu) gameState = GameState.GamePlay;
 
-            }
-           
+            }           
             base.Update(gameTime);
         }
         /// <summary>
@@ -141,61 +105,7 @@ namespace GameProject0
                 case GameState.GamePlay:
                     gameScreen.Draw(gameTime);
                     break;
-            }
-            //foreach (var coin in coins)
-            //{
-            #region coin bounding region debugging
-            /*
-            var rect = new Rectangle((int)(coin.Bounds.Center.X - coin.Bounds.Radius),
-                (int)(coin.Bounds.Center.Y - coin.Bounds.Radius),
-                (int)(2*coin.Bounds.Radius), (int)(2*coin.Bounds.Radius));
-
-            spriteBatch.Draw(ball, rect, Color.White);*/
-
-            #endregion coin bounding region debugging
-            //coin.Draw(gameTime, spriteBatch);                
-            //}
-            /*foreach (var missile in missiles)
-            {*/
-            #region missile bounding region debugging
-            /*
-            var rectM = new Rectangle((int)missile.Bounds.X, (int)missile.Bounds.Y,
-                (int)missile.Bounds.Height, (int)missile.Bounds.Width);
-            spriteBatch.Draw(rec, rectM, Color.White);*/
-            #endregion missile bounding region debugging
-            /* missile.Draw(gameTime, spriteBatch);
-         }
-         foreach (var cloud in clouds)
-         {
-             cloud.Draw(gameTime, spriteBatch);
-         }
-         spriteBatch.DrawString(bangers, $"Coins Collected: {coinCount}", new Vector2(10, 10), Color.Gold, 0f, new Vector2(), .5f, SpriteEffects.None, 0);
-         //if chopper is hit, game time is hidden.  If not, make text shows gametime
-         switch (chopper.Hit)
-         {
-             case false:
-                 spriteBatch.DrawString(bangers, $"Game Time: {gameTime.TotalGameTime.TotalSeconds}", new Vector2(30, 30), Color.Gold, 0f, new Vector2(), .5f, SpriteEffects.None, 0);
-                 break;
-             case true:
-                 spriteBatch.DrawString(bangers, $"Game Time: {gameTime.TotalGameTime.TotalSeconds}", new Vector2(30, 30), Color.Transparent, 0f, new Vector2(), .5f, SpriteEffects.None, 0);
-                 break;
-         }
-         /*chopper.Draw(gameTime, spriteBatch);
-         if (chopper.Hit)
-         {
-             if (playTime.Length == 0) playTime = Math.Round(gameTime.TotalGameTime.TotalSeconds,2).ToString();               
-             spriteBatch.Draw(explosion, new Vector2(chopper.Position.X-64, chopper.Position.Y-64), new Rectangle(0, 0, 128, 128), Color.White);
-             //spriteBatch.Draw(explosion, new Vector2(chopper.Position.X, chopper.Position.Y),
-                 //rectE, Color.White, 0f, new Vector2(64, 64), 10f, SpriteEffects.None, 0);
-             spriteBatch.DrawString(bangers, $"You got shot down!!  Press ecs to restart game", new Vector2(200, 200), Color.DarkRed, 0f, new Vector2(), .5f, SpriteEffects.None, 0);               
-             spriteBatch.DrawString(bangers, $"Survived: {playTime} seconds!", new Vector2(30, 30), Color.Gold, 0f, new Vector2(), .5f, SpriteEffects.None, 0);
-         }*/
-            #region chopper bounding region debugging
-            /*
-            var rectC = new Rectangle((int)chopper.Bounds.X,(int)chopper.Bounds.Y,
-                    (int)chopper.Bounds.Height, (int)chopper.Bounds.Width);
-            spriteBatch.Draw(rec, rectC, Color.White);*/
-            #endregion chopper bounding region debugging
+            }            
             spriteBatch.End();
             base.Draw(gameTime);
         }

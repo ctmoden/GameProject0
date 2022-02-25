@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
+using System.Threading;
 /// <summary>
 /// TO-DO: Pass graphics and Content
 /// </summary>
@@ -23,6 +24,7 @@ namespace GameProject0.Screens
         private static int coinCount;
         private static int hitCount;
         private string playTime = "";
+        private float gameSeconds = 0.0f;
         /// <summary>
         /// Constructor for game screen, sets parent game controller
         /// </summary>
@@ -30,45 +32,18 @@ namespace GameProject0.Screens
         public GamePlayScreen(GameController controller)
         {
             this.controller = controller;
-            coinCount = 0;//FIXME may want to reinitialize values after game is complete
-            hitCount = 0;
+            
             
         }
         public void Initialize()
         {
-            chopper = new ChopperSprite();
-            //spriteBatch = new SpriteBatch(controller.GraphicsDevice);//FIXME is this right?
-            coins = new CoinSprite[]
-            {
-                new CoinSprite(),
-                new CoinSprite(),
-                new CoinSprite(),
-                new CoinSprite(),
-                new CoinSprite()
-            };
-            missiles = new MissileSprite[]
-            {
-                new MissileSprite(),
-                new MissileSprite(),
-                new MissileSprite(),
-                new MissileSprite(),
-                new MissileSprite(),
-                new MissileSprite()
-            };
-            clouds = new CloudSprite[]
-            {
-                new CloudSprite(),
-                new CloudSprite(),
-                new CloudSprite(),
-                new CloudSprite(),
-                new CloudSprite(),
-                new CloudSprite()
-            };
+            setupGame();
         }
         public void LoadContent()
         {
             chopper.LoadContent(controller.Content);//FIXME is this right?
             spriteBatch = new SpriteBatch(controller.GraphicsDevice);//FIXME is this right?
+            
             bangers = controller.Content.Load<SpriteFont>("bangers");
             foreach (var coin in coins) coin.LoadContent(controller.Content);
             foreach (var missile in missiles) missile.LoadContent(controller.Content);
@@ -86,7 +61,10 @@ namespace GameProject0.Screens
             if (keyboardState.IsKeyDown(Keys.Escape) || keyboardState.IsKeyDown(Keys.Q))
             {
                 switchScreen = true;
-                restartGame();
+                gameSeconds = 0.0f;//freezes gameplay time
+                setupGame();
+                LoadContent();
+                Thread.Sleep(200);
                 return;
             }
             else
@@ -120,6 +98,7 @@ namespace GameProject0.Screens
         /// <param name="gameTime"></param>
         public void Draw(GameTime gameTime)
         {
+            gameSeconds += (float)gameTime.ElapsedGameTime.TotalSeconds;
             controller.GraphicsDevice.Clear(Color.CornflowerBlue);//this will draw, but string will not
             spriteBatch.Begin();
             foreach (var coin in coins)
@@ -142,16 +121,17 @@ namespace GameProject0.Screens
             switch (chopper.Hit)
             {
                 case false:
-                    spriteBatch.DrawString(bangers, $"Game Time: {gameTime.TotalGameTime.TotalSeconds}", new Vector2(30, 30), Color.Gold, 0f, new Vector2(), .5f, SpriteEffects.None, 0);
+                    //want gametime to restart each time a game is played
+                    spriteBatch.DrawString(bangers, $"Game Time: {Math.Round(gameSeconds,2)}", new Vector2(30, 30), Color.Gold, 0f, new Vector2(), .5f, SpriteEffects.None, 0);
                     break;
                 case true:
-                    spriteBatch.DrawString(bangers, $"Game Time: {gameTime.TotalGameTime.TotalSeconds}", new Vector2(30, 30), Color.Transparent, 0f, new Vector2(), .5f, SpriteEffects.None, 0);
+                    spriteBatch.DrawString(bangers, $"Game Time: {Math.Round(gameSeconds, 2)}", new Vector2(30, 30), Color.Transparent, 0f, new Vector2(), .5f, SpriteEffects.None, 0);
                     break;
             }
             chopper.Draw(gameTime, spriteBatch, false);
             if (chopper.Hit)
             {
-                if (playTime.Length == 0) playTime = Math.Round(gameTime.TotalGameTime.TotalSeconds, 2).ToString();
+                if (playTime.Length == 0) playTime = Math.Round(gameSeconds, 2).ToString();
                 spriteBatch.Draw(explosion, new Vector2(chopper.Position.X - 64, chopper.Position.Y - 64), new Rectangle(0, 0, 128, 128), Color.White);
                 //spriteBatch.Draw(explosion, new Vector2(chopper.Position.X, chopper.Position.Y),
                 //rectE, Color.White, 0f, new Vector2(64, 64), 10f, SpriteEffects.None, 0);
@@ -168,9 +148,40 @@ namespace GameProject0.Screens
             spriteBatch.End();
         }
 
-        private void restartGame()
+        private void setupGame()
         {
-
+            coinCount = 0;//FIXME may want to reinitialize values after game is complete
+            hitCount = 0;
+            playTime = "";
+            chopper = new ChopperSprite();
+            //spriteBatch = new SpriteBatch(controller.GraphicsDevice);//FIXME is this right?
+            coins = new CoinSprite[]
+            {
+                new CoinSprite(),
+                new CoinSprite(),
+                new CoinSprite(),
+                new CoinSprite(),
+                new CoinSprite()
+            };
+            missiles = new MissileSprite[]
+            {
+                new MissileSprite(),
+                new MissileSprite(),
+                new MissileSprite(),
+                new MissileSprite(),
+                new MissileSprite(),
+                new MissileSprite()
+            };
+            clouds = new CloudSprite[]
+            {
+                new CloudSprite(),
+                new CloudSprite(),
+                new CloudSprite(),
+                new CloudSprite(),
+                new CloudSprite(),
+                new CloudSprite()
+            };
+            
         }
     }
 }
