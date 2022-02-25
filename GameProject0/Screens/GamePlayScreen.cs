@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
+using Microsoft.Xna.Framework.Media;
 using System.Threading;
 /// <summary>
 /// TO-DO: Pass graphics and Content
@@ -53,6 +54,7 @@ namespace GameProject0.Screens
             ball = controller.Content.Load<Texture2D>("ball");
             rec = controller.Content.Load<Texture2D>("Water32Frames8x4");
             explosion = controller.Content.Load<Texture2D>("explosion0");
+            
         }
 
         public void Update(GameTime gameTime, out bool switchScreen)

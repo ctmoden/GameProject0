@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
+using Microsoft.Xna.Framework.Media;
 using GameProject0.Screens;
 namespace GameProject0
 {
@@ -19,19 +20,8 @@ namespace GameProject0
         private GraphicsDeviceManager graphics;
         
         private SpriteBatch spriteBatch;
-        /*
-        private ChopperSprite chopper;
-        private CoinSprite[] coins;
-        private MissileSprite[] missiles;
-        private CloudSprite[] clouds;
-        private SpriteFont bangers;
-        private Texture2D ball;
-        private Texture2D explosion;
-        private Texture2D rec;
-        private static int coinCount = 0;
-        private static int hitCount = 0;
-        private string playTime = "";
-        */
+        private Song backgroundMusic;
+        
 
         public GameController()
         {
@@ -57,10 +47,11 @@ namespace GameProject0
         protected override void LoadContent()
         {
             gameScreen.LoadContent();
-            menuScreen.LoadContent();                
-            //load content 
+            menuScreen.LoadContent();
+            backgroundMusic = Content.Load<Song>("Pure Country Gold - Wasted Day");
             spriteBatch = new SpriteBatch(GraphicsDevice);
             
+            MediaPlayer.IsRepeating = true;
         }
         /// <summary>
         /// updates game as it is rendered, updates animated chopper and looks for exit input
@@ -72,17 +63,19 @@ namespace GameProject0
             switch (gameState)
             {             
                 case GameState.Menu:
+                    MediaPlayer.Play(backgroundMusic);
                     menuScreen.Update(gameTime,out switchScreen);
                     break;
                 case GameState.GamePlay:
+                    
                     gameScreen.Update(gameTime, out switchScreen);
+                    
                     break;
             }
             if (switchScreen)
             {             
                 if (gameState == GameState.GamePlay) gameState = GameState.Menu;
                 else if (gameState == GameState.Menu) gameState = GameState.GamePlay;
-
             }           
             base.Update(gameTime);
         }
@@ -109,14 +102,6 @@ namespace GameProject0
             spriteBatch.End();
             base.Draw(gameTime);
         }
-        /// <summary>
-        /// When chopper is hit, display end game message 
-        /// and draw explosion sprite over the chopper
-        /// stop chopper movements?
-        /// </summary>
-        private void EndGame()
-        {
-            
-        }
+        
     }
 }

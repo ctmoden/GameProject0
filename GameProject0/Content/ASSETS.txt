@@ -14,4 +14,8 @@ Content/explosion0.png - created by GamingProgrammingSlave on OpenGameArt.org (h
 
 Content/Pickup_Coin15.wav - created by Nathan Bean for this tutorial with BXFR, released under public domain
 
+Content/Pure Country Gold - Wasted Day.mp3 - created by Pure Country Gold (https://freemusicarchive.org/music/Pure_Country_Gold/none_given_1983/Pure_Country_Gold_-_01_-_Wasted_Day) and released under CC BY-NC-ND 4.0
+
 I built upon classes used in previous tutorials, specifically CoinSprite.cs, Collisions/BoundingCircle.cs, Collisions/BoundingRectangle.cs, and Collisions/CollisionHelper.cs
+
+I modified the structure of the AduiExample exercise to play the background music and sound effects
