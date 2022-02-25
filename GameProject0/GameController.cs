@@ -41,20 +41,11 @@ namespace GameProject0
         /// </summary>
         protected override void Initialize()
         {
-            
-            switch (gameState)
-            {
-                case GameState.Menu:
-                    break;
-                case GameState.GamePlay:
-                    break;
-            }
-            /*
-            chopper = new ChopperSprite()
-            {
-                Position = new Vector2(275, 400), Direction = Direction.Right
-            };*/
-            //for game project 1
+
+            menuScreen = new MenuScreen(this);
+            gameScreen = new GamePlayScreen(this);
+            menuScreen.Initialize();
+            gameScreen.Initialize();
             chopper = new ChopperSprite();           
             coins = new CoinSprite[]
             {
@@ -93,8 +84,13 @@ namespace GameProject0
             switch (gameState)
             {
                 case GameState.Menu:
+                    gameScreen.Unload();
+                    menuScreen.LoadContent();
+                    
                     break;
                 case GameState.GamePlay:
+                    menuScreen.Unload();
+                    gameScreen.LoadContent();
                     break;
             }
             //load content 
@@ -118,8 +114,10 @@ namespace GameProject0
             switch (gameState)
             {
                 case GameState.Menu:
+                    menuScreen.Update(gameTime);
                     break;
                 case GameState.GamePlay:
+                    gameScreen.Update(gameTime);
                     break;
             }
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape) 

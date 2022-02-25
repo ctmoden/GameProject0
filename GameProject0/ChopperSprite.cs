@@ -13,11 +13,11 @@ namespace GameProject0
     /// <summary>
     /// Direction chopper yaws left to right
     /// </summary>
-    /*public enum Direction
+    public enum Direction
     {
         Right = 0,
         Left = 1
-    }*/
+    }
     /// <summary>
     /// Class representing animated helicopter sprite.
     /// The rotors of the helicopter will spin when animated
@@ -27,6 +27,7 @@ namespace GameProject0
 
         private KeyboardState keyboardState;
 
+        public Direction Direction;
         /// <summary>
         /// pixel speed of animation
         /// </summary>
@@ -38,7 +39,7 @@ namespace GameProject0
         /// <summary>
         /// direction timer.  Times how long chopper moves in certian direction.
         /// </summary>
-        //private double directionTimer;
+        private double directionTimer;
         /// <summary>
         /// Controls timing of animation
         /// </summary>
@@ -64,6 +65,15 @@ namespace GameProject0
         /// </summary>
         public Vector2 Position => position;
         /// <summary>
+        /// Position of chopper on menu screen FIXME revert to game project 0
+        /// </summary>
+        private Vector2 menuPosition = new Vector2(400, 400);
+        public Vector2 MenuPosition
+        {
+            get { return menuPosition; }
+            set { menuPosition = value; }
+        }
+        /// <summary>
         /// private backing variable for Hit property
         /// </summary>
         private bool hit => Hit;
@@ -88,22 +98,15 @@ namespace GameProject0
         }
         /// <summary>
         /// Update chopper animation
+        /// FIXME switch code between two update methods
         /// </summary>
         /// <param name="gameTime"></param>
         public void Update(GameTime gameTime)
         {
             keyboardState = Keyboard.GetState();
-            if (!hit)
-            {
-                if (keyboardState.IsKeyDown(Keys.Left) || keyboardState.IsKeyDown(Keys.A)) position += new Vector2((float)-3.5, 0);
-                if (keyboardState.IsKeyDown(Keys.Right) || keyboardState.IsKeyDown(Keys.D)) position += new Vector2((float)3.5, 0);
-            }
-            //FIXME add keys for wasd and or up/down arrows?
-            //recenter bounding region as chopper moves
-            bounds.X = position.X - 13;
-            bounds.Y = position.Y - 30;
+            
             #region direction timer
-            /*
+            
             directionTimer += gameTime.ElapsedGameTime.TotalSeconds;
             //switch direction every 1.5 seconds
             if(directionTimer > 1.5)
@@ -125,13 +128,26 @@ namespace GameProject0
             {
                 //FIXME: 150 = pixels/frame, pixels/second, or what?
                 case Direction.Left:
-                    Position += new Vector2(-1, 0) * PIXEL_SPEED * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                    menuPosition += new Vector2(-1, 0) * PIXEL_SPEED * (float)gameTime.ElapsedGameTime.TotalSeconds;
                     break;
                 case Direction.Right:
-                    Position += new Vector2(1, 0) * PIXEL_SPEED * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                    menuPosition += new Vector2(1, 0) * PIXEL_SPEED * (float)gameTime.ElapsedGameTime.TotalSeconds;
                     break;
-            }*/
+            }
             #endregion direction timer
+        }
+        public void Update()
+        {
+            keyboardState = Keyboard.GetState();
+            if (!hit)
+            {
+                if (keyboardState.IsKeyDown(Keys.Left) || keyboardState.IsKeyDown(Keys.A)) position += new Vector2((float)-3.5, 0);
+                if (keyboardState.IsKeyDown(Keys.Right) || keyboardState.IsKeyDown(Keys.D)) position += new Vector2((float)3.5, 0);
+            }
+            //FIXME add keys for wasd and or up/down arrows?
+            //recenter bounding region as chopper moves
+            bounds.X = position.X - 13;
+            bounds.Y = position.Y - 30;
         }
         /// <summary>
         /// draws animated helicopter sprite
