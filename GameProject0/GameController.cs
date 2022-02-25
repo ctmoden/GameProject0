@@ -153,7 +153,7 @@ namespace GameProject0
         /// <param name="gameTime"></param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.CornflowerBlue);//TODO use this in other methods
             spriteBatch.Begin();
             foreach (var coin in coins)
             {
