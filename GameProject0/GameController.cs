@@ -17,7 +17,9 @@ namespace GameProject0
         private GamePlayScreen gameScreen;//TODO send in states to screens so they can load differently?  Pass in game controller to these objects 
         //FIXME group private fields into regions
         private GraphicsDeviceManager graphics;
+        
         private SpriteBatch spriteBatch;
+        /*
         private ChopperSprite chopper;
         private CoinSprite[] coins;
         private MissileSprite[] missiles;
@@ -29,6 +31,7 @@ namespace GameProject0
         private static int coinCount = 0;
         private static int hitCount = 0;
         private string playTime = "";
+        */
 
         public GameController()
         {
@@ -46,7 +49,7 @@ namespace GameProject0
             gameScreen = new GamePlayScreen(this);
             menuScreen.Initialize();
             gameScreen.Initialize();
-            chopper = new ChopperSprite();           
+            /*chopper = new ChopperSprite();           
             coins = new CoinSprite[]
             {
                 new CoinSprite(),
@@ -73,7 +76,7 @@ namespace GameProject0
                 new CloudSprite(),
                 new CloudSprite()
 
-            };
+            };*/
             base.Initialize();
         }
         /// <summary>
@@ -95,7 +98,7 @@ namespace GameProject0
             }
             //load content 
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            
+            /*
             foreach (var coin in coins) coin.LoadContent(Content);
             foreach (var missile in missiles) missile.LoadContent(Content);
             chopper.LoadContent(Content);
@@ -103,7 +106,7 @@ namespace GameProject0
             bangers = Content.Load<SpriteFont>("bangers");
             ball = Content.Load<Texture2D>("ball");
             rec = Content.Load<Texture2D>("Water32Frames8x4");
-            explosion = Content.Load<Texture2D>("explosion0");
+            explosion = Content.Load<Texture2D>("explosion0");*/
         }
         /// <summary>
         /// updates game as it is rendered, updates animated chopper and looks for exit input
@@ -111,15 +114,24 @@ namespace GameProject0
         /// <param name="gameTime"></param>
         protected override void Update(GameTime gameTime)
         {
+            bool switchScreen = false;
             switch (gameState)
             {
+                
                 case GameState.Menu:
-                    menuScreen.Update(gameTime);
+                    menuScreen.Update(gameTime,out switchScreen);
                     break;
                 case GameState.GamePlay:
-                    gameScreen.Update(gameTime);
+                    gameScreen.Update(gameTime, out switchScreen);
                     break;
             }
+            if (switchScreen)
+            {
+                if (gameState == GameState.GamePlay) gameState = GameState.Menu;
+                if (gameState == GameState.Menu) gameState = GameState.GamePlay;
+
+            }
+            /*
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape) 
                 || Keyboard.GetState().IsKeyDown(Keys.Q))
                 Exit();
@@ -143,7 +155,7 @@ namespace GameProject0
                 }
                 missile.Update(chopper.Hit);
             }
-            foreach (var cloud in clouds) cloud.Update(chopper.Hit);
+            foreach (var cloud in clouds) cloud.Update(chopper.Hit);*/
             base.Update(gameTime);
         }
         /// <summary>
@@ -153,10 +165,21 @@ namespace GameProject0
         /// <param name="gameTime"></param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);//TODO use this in other methods
-            spriteBatch.Begin();
-            foreach (var coin in coins)
+            GraphicsDevice.Clear(Color.CornflowerBlue);
+            switch (gameState)
             {
+                case GameState.Menu:
+                    menuScreen.Draw(gameTime);
+                    break;
+                case GameState.GamePlay:
+                    gameScreen.Draw(gameTime);
+                    break;
+            }
+            //TODO use this in other methods
+            spriteBatch.Begin();
+            
+            //foreach (var coin in coins)
+            //{
                 #region coin bounding region debugging
                 /*
                 var rect = new Rectangle((int)(coin.Bounds.Center.X - coin.Bounds.Radius),
@@ -164,18 +187,19 @@ namespace GameProject0
                     (int)(2*coin.Bounds.Radius), (int)(2*coin.Bounds.Radius));
 
                 spriteBatch.Draw(ball, rect, Color.White);*/
+            
                 #endregion coin bounding region debugging
-                coin.Draw(gameTime, spriteBatch);                
-            }
-            foreach (var missile in missiles)
-            {
+                //coin.Draw(gameTime, spriteBatch);                
+            //}
+            /*foreach (var missile in missiles)
+            {*/
                 #region missile bounding region debugging
                 /*
                 var rectM = new Rectangle((int)missile.Bounds.X, (int)missile.Bounds.Y,
                     (int)missile.Bounds.Height, (int)missile.Bounds.Width);
                 spriteBatch.Draw(rec, rectM, Color.White);*/
                 #endregion missile bounding region debugging
-                missile.Draw(gameTime, spriteBatch);
+               /* missile.Draw(gameTime, spriteBatch);
             }
             foreach (var cloud in clouds)
             {
@@ -192,7 +216,7 @@ namespace GameProject0
                     spriteBatch.DrawString(bangers, $"Game Time: {gameTime.TotalGameTime.TotalSeconds}", new Vector2(30, 30), Color.Transparent, 0f, new Vector2(), .5f, SpriteEffects.None, 0);
                     break;
             }
-            chopper.Draw(gameTime, spriteBatch);
+            /*chopper.Draw(gameTime, spriteBatch);
             if (chopper.Hit)
             {
                 if (playTime.Length == 0) playTime = Math.Round(gameTime.TotalGameTime.TotalSeconds,2).ToString();               
@@ -201,7 +225,7 @@ namespace GameProject0
                     //rectE, Color.White, 0f, new Vector2(64, 64), 10f, SpriteEffects.None, 0);
                 spriteBatch.DrawString(bangers, $"You got shot down!!  Press ecs to restart game", new Vector2(200, 200), Color.DarkRed, 0f, new Vector2(), .5f, SpriteEffects.None, 0);               
                 spriteBatch.DrawString(bangers, $"Survived: {playTime} seconds!", new Vector2(30, 30), Color.Gold, 0f, new Vector2(), .5f, SpriteEffects.None, 0);
-            }
+            }*/
             #region chopper bounding region debugging
             /*
             var rectC = new Rectangle((int)chopper.Bounds.X,(int)chopper.Bounds.Y,

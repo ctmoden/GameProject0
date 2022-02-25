@@ -150,11 +150,12 @@ namespace GameProject0
             bounds.Y = position.Y - 30;
         }
         /// <summary>
-        /// draws animated helicopter sprite
+        /// 
         /// </summary>
         /// <param name="gameTime"></param>
         /// <param name="spriteBatch"></param>
-        public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+        /// <param name="menu"></param>
+        public void Draw(GameTime gameTime, SpriteBatch spriteBatch, bool menu)
         {
             if (!hit)
             {
@@ -180,8 +181,10 @@ namespace GameProject0
             var sourceRectangle = new Rectangle(animationFrame * 256, animationRow * 256, 256, 256);
                 //draw with upadted position and source rectangle
                 //spriteBatch.Draw(texture, Position, sourceRectangle, Color.White);
-                spriteBatch.Draw(texture, position, sourceRectangle, Color.White, 0f, new Vector2(128, 128), .5f, SpriteEffects.None, 0);
-
+                if(!menu)spriteBatch.Draw(texture, position, sourceRectangle, Color.White, 0f, new Vector2(128, 128), .5f, SpriteEffects.None, 0);
+                if(menu) spriteBatch.Draw(texture, menuPosition, sourceRectangle, Color.White, 0f, new Vector2(128, 128), 1f, SpriteEffects.None, 0);
         }
+
+
     }
 }
