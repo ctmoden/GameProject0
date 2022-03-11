@@ -18,6 +18,8 @@ namespace GameProject0
 
         private double animationTimer;
 
+        private double colorTimer;
+
         private int animationFrame;
 
         private Vector2 position;
@@ -25,8 +27,19 @@ namespace GameProject0
         private Texture2D texture;
 
         private const int PIXEL_SPEED = 150;
-        
 
+        Color[] colors = new Color[]
+        {
+            Color.Gold,
+            Color.Red,
+            Color.Crimson,
+            Color.CadetBlue,
+            Color.Aqua,
+            Color.HotPink,
+            Color.LimeGreen
+
+        };
+        private Color color;
         //private BoundingRectangle bounds;
 
         private BoundingCircle bounds;
@@ -76,8 +89,9 @@ namespace GameProject0
             }
             //16 pixels in w and h
             var source = new Rectangle(animationFrame * 16, 0, 16, 16);
+            //color = colors[HelperMethods.Next(colors.Length)];
             //drawing with upper left hand corner, circle will be up and to the left each direction, soft origin backwards by 8
-            spriteBatch.Draw(texture, position, source, Color.White);
+            spriteBatch.Draw(texture, position, source, color);
         }
         /// <summary>
         /// Update velocity and whether it is touching the bottom of the screen
@@ -86,7 +100,7 @@ namespace GameProject0
         ///     if the viewport is 
         /// </summary>
         /// <param name="gameTime"></param>
-        public void Update(bool stop)
+        public void Update(GameTime gameTime, bool stop)
         {
             if (!stop)
             {
@@ -102,7 +116,12 @@ namespace GameProject0
                     bounds.Center = position;
                     Collided = false;
                 }
-
+                colorTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
+                if (colorTimer > .5)
+                {
+                    color = colors[HelperMethods.Next(colors.Length)];
+                    colorTimer -= .5;
+                }
             }
             else
             {

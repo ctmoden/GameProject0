@@ -90,7 +90,7 @@ namespace GameProject0.Screens
                     coin.Collided = true;
                     coinCount++;
                 }
-                coin.Update(chopper.Hit);
+                coin.Update(gameTime, chopper.Hit);
             }
             foreach (var missile in missiles)
             {
@@ -177,6 +177,7 @@ namespace GameProject0.Screens
                 chopper.Draw(gameTime, spriteBatch, false);
                 spriteBatch.DrawString(bangers, $"You got shot down!!  Press ecs to restart game", new Vector2(200, 200), Color.DarkRed, 0f, new Vector2(), .5f, SpriteEffects.None, 0);
                 spriteBatch.DrawString(bangers, $"Survived: {playTime} seconds!", new Vector2(30, 30), Color.Gold, 0f, new Vector2(), .5f, SpriteEffects.None, 0);
+                spriteBatch.DrawString(bangers, $"Coins Collected: {coinCount}", new Vector2(10, 10), Color.Gold, 0f, new Vector2(), .5f, SpriteEffects.None, 0);
                 spriteBatch.Draw(explosion, new Vector2(chopper.Position.X - 64, chopper.Position.Y - 64), new Rectangle(0, 0, 128, 128), Color.White);
                 spriteBatch.End();
             }

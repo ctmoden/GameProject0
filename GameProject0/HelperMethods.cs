@@ -12,13 +12,14 @@ namespace GameProject0
     /// </summary>
     public static class HelperMethods
     {
+        static Random rand = new Random();
         /// <summary>
         /// returns new random vector for positioning of sprites on game screen 
         /// </summary>
         /// <returns></returns>
         public static Vector2 RandomVectGenerator()
         {
-            Random rand = new Random();
+            
             return new Vector2((float)rand.NextDouble() * Constants.GAME_WIDTH, (float)rand.NextDouble() * Constants.GAME_WIDTH - Constants.GAME_WIDTH);
 
         }
@@ -31,10 +32,11 @@ namespace GameProject0
         /// <returns></returns>
         public static Vector2 RandomYVelGenerator(int min, int max)
         {
-            Random rand = new Random();
             //chooses random y velocity of missile
             int randVel = rand.Next(min, max);
             return new Vector2(0, randVel);
         }
+
+        public static int Next(int max) => rand.Next(max);
     }
 }

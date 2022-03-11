@@ -13,13 +13,16 @@ namespace GameProject0
     {
         private Texture2D atlas;
         private Vector2 position;
-
+        private Random random;
+        private float rotation;
       /// <summary>
       /// Constructor for cloud sprite, generates random position
       /// </summary>
         public CloudSprite()
         {
             position = HelperMethods.RandomVectGenerator();
+            random = new Random();
+            setRotation();
         }
         /// <summary>
         /// Loads atlas texture with cloud in it
@@ -42,6 +45,7 @@ namespace GameProject0
                 if (position.Y > Constants.GAME_HEIGHT)
                 {
                     position = HelperMethods.RandomVectGenerator();
+                    setRotation();
                 }
             }
             else
@@ -56,8 +60,12 @@ namespace GameProject0
         /// <param name="spriteBatch"></param>
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(atlas, position, new Rectangle(80, 32, 16, 16), Color.White, 0f, new Vector2(8, 8), 7, SpriteEffects.None, 0);
+            spriteBatch.Draw(atlas, position, new Rectangle(80, 32, 16, 16), Color.White, rotation, new Vector2(8, 8), 7, SpriteEffects.None, 0);          
+        }
 
+        private void setRotation()
+        {
+            rotation = (float) random.NextDouble();
         }
     }
 }
