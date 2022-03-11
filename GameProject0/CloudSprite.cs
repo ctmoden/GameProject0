@@ -46,8 +46,8 @@ namespace GameProject0
         {
             if (!stop)
             {
-                position += HelperMethods.RandomYVelGenerator(1, 3);//2,5
-                if (position.Y > Constants.GAME_HEIGHT)
+                position += HelperMethods.RandomYVelGenerator(2, 5);//2,5
+                if (position.Y >  Constants.GAME_HEIGHT+100)
                 {
                     position = HelperMethods.RandomVectGenerator();
                     setRotation();
@@ -67,7 +67,7 @@ namespace GameProject0
         {
             //spriteBatch.Begin(blendState: blendState);
            
-            spriteBatch.Draw(atlas, position, new Rectangle(80, 32, 16, 16), Color.White*.7f, rotation, new Vector2(8, 8), 7, SpriteEffects.None, 0);
+            spriteBatch.Draw(atlas, position, new Rectangle(80, 32, 16, 16), Color.White*.5f, rotation, new Vector2(8, 8), 7, SpriteEffects.None, 0);
             //spriteBatch.End();
         }
 
