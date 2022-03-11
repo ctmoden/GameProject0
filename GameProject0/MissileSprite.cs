@@ -68,7 +68,7 @@ namespace GameProject0
         /// <param name="spriteBatch"></param>
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-            var source = new Rectangle(0, 0, 32, 32);
+            var source = new Rectangle(0, 0, 32, 32);           
             spriteBatch.Draw(texture, position, source, Color.White, 0, new Vector2(16, 16), 1f, SpriteEffects.FlipVertically, 0);
         }
     }

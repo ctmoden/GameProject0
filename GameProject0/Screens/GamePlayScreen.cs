@@ -25,6 +25,10 @@ namespace GameProject0.Screens
         private static int coinCount;
         private static int hitCount;
         private string playTime = "";
+        //From example in class Module "Special Effects"
+        private bool _shaking = false;
+        private float _shakeTime;
+        //END: From example in class Module "Special Effects"
         //tracks total seconds elapsed from beginning of each game start
         private float gameSeconds = 0.0f;
         /// <summary>
@@ -94,6 +98,7 @@ namespace GameProject0.Screens
                 {
                     hitCount++;
                     chopper.Hit = true;
+                    _shaking = true;
                 }
                 missile.Update(chopper.Hit);
             }
@@ -136,6 +141,8 @@ namespace GameProject0.Screens
                     break;
             }
             chopper.Draw(gameTime, spriteBatch, false);
+            //draw shaking here
+            Matrix shakeTransform = Matrix.Identity;
             if (chopper.Hit)
             {
                 if (playTime.Length == 0) playTime = Math.Round(gameSeconds, 2).ToString();
@@ -144,7 +151,15 @@ namespace GameProject0.Screens
                 //rectE, Color.White, 0f, new Vector2(64, 64), 10f, SpriteEffects.None, 0);
                 spriteBatch.DrawString(bangers, $"You got shot down!!  Press ecs to restart game", new Vector2(200, 200), Color.DarkRed, 0f, new Vector2(), .5f, SpriteEffects.None, 0);
                 spriteBatch.DrawString(bangers, $"Survived: {playTime} seconds!", new Vector2(30, 30), Color.Gold, 0f, new Vector2(), .5f, SpriteEffects.None, 0);
-            }
+                if (_shaking)
+                {
+                    _shakeTime += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+                    Matrix shakeTranslation = Matrix.CreateTranslation(10 * MathF.Sin(_shakeTime), 10 * MathF.Cos(_shakeTime), 0);
+                    shakeTransform = shakeTranslation;
+                    if (_shakeTime > 1000) _shaking = false;                 
+                }
+                //_shakeTime = 0f;
+            }           
             #region chopper bounding region debugging
             /*
             var rectC = new Rectangle((int)chopper.Bounds.X,(int)chopper.Bounds.Y,
@@ -153,12 +168,27 @@ namespace GameProject0.Screens
             #endregion chopper bounding region debugging
             //spriteBatch.DrawString(bangers, "Test Screen", new Vector2(250, 250), Color.Black);           
             spriteBatch.End();
+            if (_shaking)
+            {
+                spriteBatch.Begin(transformMatrix: shakeTransform);
+                foreach (var missile in missiles) missile.Draw(gameTime, spriteBatch);
+                foreach (var cloud in clouds) cloud.Draw(gameTime, spriteBatch);
+                foreach (var coin in coins) coin.Draw(gameTime, spriteBatch);
+                chopper.Draw(gameTime, spriteBatch, false);
+                spriteBatch.DrawString(bangers, $"You got shot down!!  Press ecs to restart game", new Vector2(200, 200), Color.DarkRed, 0f, new Vector2(), .5f, SpriteEffects.None, 0);
+                spriteBatch.DrawString(bangers, $"Survived: {playTime} seconds!", new Vector2(30, 30), Color.Gold, 0f, new Vector2(), .5f, SpriteEffects.None, 0);
+                spriteBatch.Draw(explosion, new Vector2(chopper.Position.X - 64, chopper.Position.Y - 64), new Rectangle(0, 0, 128, 128), Color.White);
+                spriteBatch.End();
+            }
+
         }
+       
         /// <summary>
         /// sets up game upon first initialization or when game restarts
         /// </summary>
         private void setupGame()
         {
+            _shakeTime = 0;
             coinCount = 0;
             hitCount = 0;
             playTime = "";
