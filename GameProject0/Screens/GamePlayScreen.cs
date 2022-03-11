@@ -53,7 +53,6 @@ namespace GameProject0.Screens
         {
             chopper.LoadContent(controller.Content);//FIXME is this right?
             spriteBatch = new SpriteBatch(controller.GraphicsDevice);//FIXME is this right?
-            
             bangers = controller.Content.Load<SpriteFont>("bangers");
             foreach (var coin in coins) coin.LoadContent(controller.Content);
             foreach (var missile in missiles) missile.LoadContent(controller.Content);
@@ -63,7 +62,6 @@ namespace GameProject0.Screens
             ball = controller.Content.Load<Texture2D>("ball");
             rec = controller.Content.Load<Texture2D>("Water32Frames8x4");
             explosion = controller.Content.Load<Texture2D>("explosion0");
-            
         }
 
         public void Update(GameTime gameTime, out bool switchScreen)

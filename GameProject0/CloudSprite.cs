@@ -15,13 +15,18 @@ namespace GameProject0
         private Vector2 position;
         private Random random;
         private float rotation;
-      /// <summary>
-      /// Constructor for cloud sprite, generates random position
-      /// </summary>
+        private const int AlphaBlendDrawOrder = 100;
+        BlendState blendState; 
+
+        /// <summary>
+        /// Constructor for cloud sprite, generates random position
+        /// </summary>
         public CloudSprite()
         {
             position = HelperMethods.RandomVectGenerator();
             random = new Random();
+            //blendstate for transparency
+            blendState = BlendState.AlphaBlend;
             setRotation();
         }
         /// <summary>
@@ -41,7 +46,7 @@ namespace GameProject0
         {
             if (!stop)
             {
-                position += HelperMethods.RandomYVelGenerator(2, 5);
+                position += HelperMethods.RandomYVelGenerator(1, 3);//2,5
                 if (position.Y > Constants.GAME_HEIGHT)
                 {
                     position = HelperMethods.RandomVectGenerator();
@@ -60,7 +65,10 @@ namespace GameProject0
         /// <param name="spriteBatch"></param>
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(atlas, position, new Rectangle(80, 32, 16, 16), Color.White, rotation, new Vector2(8, 8), 7, SpriteEffects.None, 0);          
+            //spriteBatch.Begin(blendState: blendState);
+           
+            spriteBatch.Draw(atlas, position, new Rectangle(80, 32, 16, 16), Color.White*.7f, rotation, new Vector2(8, 8), 7, SpriteEffects.None, 0);
+            //spriteBatch.End();
         }
 
         private void setRotation()

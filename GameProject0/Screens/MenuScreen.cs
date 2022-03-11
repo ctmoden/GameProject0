@@ -30,6 +30,8 @@ namespace GameProject0.Screens
         private SpriteFont bangers;
         private CloudSprite[] clouds;
         private KeyboardState keyboardState;
+        BlendState blendState;
+
         /// <summary>
         /// Constructor for menu, sets parent game controller
         /// </summary>
@@ -37,6 +39,7 @@ namespace GameProject0.Screens
         public MenuScreen(GameController controller)
         {
             this.controller = controller;
+            
         }
         /// <summary>
         /// initializes assets used in menu screen
@@ -55,9 +58,15 @@ namespace GameProject0.Screens
                 new CloudSprite(),
                 new CloudSprite(),
                 new CloudSprite(),
+                new CloudSprite(),
+                new CloudSprite(),
+                new CloudSprite(),
+                new CloudSprite(),
+                new CloudSprite(),
                 new CloudSprite()
 
             };
+            blendState = BlendState.AlphaBlend;
             //spriteBatch = new SpriteBatch(controller.GraphicsDevice);
         }
         public void LoadContent()
@@ -92,13 +101,17 @@ namespace GameProject0.Screens
         public void Draw(GameTime gameTime)
         {
             controller.GraphicsDevice.Clear(Color.CornflowerBlue);
-            spriteBatch.Begin();
+            spriteBatch.Begin(blendState: blendState);
             spriteBatch.DrawString(bangers, "Choppa Fight!!", new Vector2(250, 10), Color.Black);
             spriteBatch.DrawString(bangers, "Press esc or q to quit, enter to play", new Vector2(220, 80), Color.Black, 0f, new Vector2(), .50f, SpriteEffects.None, 0);
             spriteBatch.DrawString(bangers, "Press esc or q in game to return to menu screen", new Vector2(170, 130), Color.Black, 0f, new Vector2(), .50f, SpriteEffects.None, 0);
-            chopper.Draw(gameTime, spriteBatch,true);
             foreach (var cloud in clouds) cloud.Draw(gameTime, spriteBatch);
+            chopper.Draw(gameTime, spriteBatch,true);
             spriteBatch.End();
+            /*spriteBatch.Begin(blendState: blendState);
+            foreach (var cloud in clouds) cloud.Draw(gameTime, spriteBatch);
+            spriteBatch.End();*/
         }
+
     }
 }
