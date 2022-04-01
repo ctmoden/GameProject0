@@ -44,7 +44,7 @@ namespace GameProject0
         /// <param name="content"></param>
         public void LoadContent(ContentManager content)
         {
-            string data = File.ReadAllText(Path.Join(content.RootDirectory, filename));
+            string data = File.ReadAllText(Path.Join(content.RootDirectory, filename));//PUT IN RELEASE FOLDER
             var lines = data.Split('\n');
 
             var tilesetFilename = lines[0].Trim();//extract filename

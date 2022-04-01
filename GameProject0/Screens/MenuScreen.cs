@@ -85,6 +85,7 @@ namespace GameProject0.Screens
         {
             switchScreen = false;
             keyboardState = Keyboard.GetState();
+            tilemap.Update(gameTime);
             foreach (var cloud in clouds) cloud.Update(false);
             chopper.Update(gameTime);
             if(keyboardState.IsKeyDown(Keys.Escape) || keyboardState.IsKeyDown(Keys.Q))
