@@ -111,11 +111,11 @@ namespace GameProject0
             //load a GIANT ass tilemap (like 10000 blocks high)
             //every ~.25 seconds increment
             #region old
-            for (int y = _yOffset1; y < _yOffset2; y++)//for(int y = 0; y < mapHeight; y++)
+            for (int y = 0; y < mapHeight; y++)//for(int y = 0; y < mapHeight; y++)
             {
                 for(int x = 0; x < mapWidth; x++)
                 {
-                    int i = y * mapWidth + x;
+                    int i = (y*(_yOffset2-_yOffset1)) * mapWidth + x;
                     int index = map[i] - 1;//map actually starting at 1, but indexed starting at 0
                     if (index == -1) continue;//skip one increment through this particular loop
                     spriteBatch.Draw(texture, new Vector2(
