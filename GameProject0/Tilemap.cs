@@ -37,7 +37,6 @@ namespace GameProject0
         public Tilemap(string filename)
         {
             this.filename = filename;
-            _yOffset = 0;
         }
         /// <summary>
         /// This method, structured from the class example
@@ -76,6 +75,7 @@ namespace GameProject0
             var thirdLine = lines[2].Split(',');
             mapWidth = int.Parse(thirdLine[0]);
             mapHeight = int.Parse(thirdLine[1]);
+            _yOffset = mapHeight - 1;
             //create our map
             //each number in this long list represents the index of a tile in the tileset
             var fourthLine = lines[3].Split(',');
@@ -98,17 +98,19 @@ namespace GameProject0
         /// <param name="spriteBatch"></param>
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
+            //var translation = Matrix.CreateTranslation()
             //based off game time I could shift rows down by 
             //a height of one and draw another row to top or bottom
             //use tiled
             //monogame extended for loading tmx
             //load a GIANT ass tilemap (like 10000 blocks high)
             //every ~.25 seconds increment
-            for (int y = _yOffset; y < mapHeight; y++)
+            for (int y = _yOffset; y >= 0; y--)//for(int y = 0; y < _mapHeight; y++)
             {
-                for (int x = 0; x < mapWidth; x++)
+                for (int x = mapWidth - 1; x >= 0; x--)//for(int x = 0; x < _mapWidth; x++)
                 {
-                    int index = map[(y * mapWidth) + x] - 1;//map actually starting at 1, but indexed starting at 0
+                    int i = y * mapWidth + x;
+                    int index = map[i] - 1;//map actually starting at 1, but indexed starting at 0
                     if (index == -1) continue;//skip one increment through this particular loop
                     spriteBatch.Draw(texture, new Vector2(
                         x * tileWidth,//how many pixels over each block is
@@ -118,15 +120,18 @@ namespace GameProject0
                 }
             }
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="gameTime"></param>
         public void Update(GameTime gameTime)
         {
             //deal with timing here
             transitionTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
-            if(transitionTimer > .25)
+            if(transitionTimer > 1.0)
             {
-                _yOffset++;
-                transitionTimer -= .25;
+                _yOffset--;
+                transitionTimer -= 1.0;
             }
         }
 

@@ -30,6 +30,7 @@ namespace GameProject0.Screens
         private SpriteFont bangers;
         private CloudSprite[] clouds;
         private KeyboardState keyboardState;
+        private Tilemap tilemap;
         BlendState blendState;
 
         /// <summary>
@@ -39,6 +40,7 @@ namespace GameProject0.Screens
         public MenuScreen(GameController controller)
         {
             this.controller = controller;
+            tilemap = new Tilemap("map.txt");
             
         }
         /// <summary>
@@ -75,6 +77,7 @@ namespace GameProject0.Screens
             chopper.LoadContent(controller.Content);//FIXME is this right?
             spriteBatch = new SpriteBatch(controller.GraphicsDevice);//FIXME is this right?
             bangers = controller.Content.Load<SpriteFont>("bangers");
+            tilemap.LoadContent(controller.Content);
             foreach (var cloud in clouds) cloud.LoadContent(controller.Content);
         }
 
@@ -102,6 +105,7 @@ namespace GameProject0.Screens
         {
             controller.GraphicsDevice.Clear(Color.CornflowerBlue);
             spriteBatch.Begin(blendState: blendState);
+            tilemap.Draw(gameTime, spriteBatch);
             spriteBatch.DrawString(bangers, "Choppa Fight!!", new Vector2(250, 10), Color.Black);
             spriteBatch.DrawString(bangers, "Press esc or q to quit, enter to play", new Vector2(220, 80), Color.Black, 0f, new Vector2(), .50f, SpriteEffects.None, 0);
             spriteBatch.DrawString(bangers, "Press esc or q in game to return to menu screen", new Vector2(170, 130), Color.Black, 0f, new Vector2(), .50f, SpriteEffects.None, 0);
