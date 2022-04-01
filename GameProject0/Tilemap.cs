@@ -30,23 +30,27 @@ namespace GameProject0
         /// </summary>
         private string filename;
 
-        private int _yOffset;
+        private int _yOffset1;
+
+        private int _yOffset2;
+
+        private Random rand;
 
         private double transitionTimer;
 
         public Tilemap(string filename)
         {
             this.filename = filename;
+            rand = new Random();
         }
         /// <summary>
-        /// This method, structured from the class example
+        /// This method, structured from the class example, loads the content of the map data 
         /// </summary>
         /// <param name="content"></param>
         public void LoadContent(ContentManager content)
         {
             string data = File.ReadAllText(Path.Join(content.RootDirectory, filename));//PUT IN RELEASE FOLDER
             var lines = data.Split('\n');
-
             var tilesetFilename = lines[0].Trim();//extract filename
             texture = content.Load<Texture2D>(tilesetFilename);//load texture content from file name
             //second line is width and height (tile size)
@@ -75,11 +79,11 @@ namespace GameProject0
             var thirdLine = lines[2].Split(',');
             mapWidth = int.Parse(thirdLine[0]);
             mapHeight = int.Parse(thirdLine[1]);
-            _yOffset = mapHeight - 1;
+            initializeYOffsets();
             //create our map
             //each number in this long list represents the index of a tile in the tileset
             var fourthLine = lines[3].Split(',');
-            map = new int[mapWidth * mapHeight];
+            /*map = new int[mapWidth * mapHeight];
             //iterate through across y then x to avoid cach misses
             //2d array => 1d
             //imagine it as a 2d array with all tileset targets arranged to mirror the map
@@ -88,7 +92,8 @@ namespace GameProject0
             for (int i = 0; i < mapWidth * mapHeight; i++)
             {
                 map[i] = int.Parse(fourthLine[i]);
-            }
+            }*/
+            loadMap();
         }
         /// <summary>
         /// scrolling tilemap, especially since starting at beginning of map data?  I could go backwards...
@@ -105,9 +110,10 @@ namespace GameProject0
             //monogame extended for loading tmx
             //load a GIANT ass tilemap (like 10000 blocks high)
             //every ~.25 seconds increment
-            for (int y = _yOffset; y >= 0; y--)//for(int y = 0; y < _mapHeight; y++)
+            #region old
+            for (int y = _yOffset1; y < _yOffset2; y++)//for(int y = 0; y < mapHeight; y++)
             {
-                for (int x = mapWidth - 1; x >= 0; x--)//for(int x = 0; x < _mapWidth; x++)
+                for(int x = 0; x < mapWidth; x++)
                 {
                     int i = y * mapWidth + x;
                     int index = map[i] - 1;//map actually starting at 1, but indexed starting at 0
@@ -119,7 +125,23 @@ namespace GameProject0
                         tiles[index], Color.White);
                 }
             }
+            #endregion old
+            #region new
+            /*for (int x = 0; x < mapWidth; x++)
+            {
+                int y = _yOffset2 - _yOffset1;
+                int i = y * mapWidth + x;
+                int index = map[i] - 1;//map actually starting at 1, but indexed starting at 0
+                if (index == -1) continue;//skip one increment through this particular loop
+                spriteBatch.Draw(texture, new Vector2(
+                    x * tileWidth,//how many pixels over each block is
+                    y * tileHeight
+                    ),
+                    tiles[index], Color.White);
+            }*/
+            #endregion new
         }
+
         /// <summary>
         /// 
         /// </summary>
@@ -128,11 +150,30 @@ namespace GameProject0
         {
             //deal with timing here
             transitionTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
-            if(transitionTimer > 1.0)
+            if(transitionTimer > 2.0)
             {
-                _yOffset--;
-                transitionTimer -= 1.0;
+                if(_yOffset2 < map.Length)
+                {
+                    _yOffset1++;
+                    _yOffset2++;
+                }                
+                transitionTimer -= 2.0;
             }
+        }
+        private void loadMap()
+        {
+            map = new int[mapWidth * mapHeight * 10];
+            for (int i = 0; i < map.Length; i++)
+            {
+                int randInt = rand.Next(1, 5);
+                if (randInt == 3) map[i] = 2;
+                else map[i] = randInt;
+            }
+        }
+        private void initializeYOffsets()
+        {
+            _yOffset1 = 0;
+            _yOffset2 = mapHeight;
         }
 
     }
