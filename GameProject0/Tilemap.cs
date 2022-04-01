@@ -107,9 +107,6 @@ namespace GameProject0
             //based off game time I could shift rows down by 
             //a height of one and draw another row to top or bottom
             //use tiled
-            //monogame extended for loading tmx
-            //load a GIANT ass tilemap (like 10000 blocks high)
-            //every ~.25 seconds increment
             #region old
             for (int y = 0; y < mapHeight; y++)//for(int y = 0; y < mapHeight; y++)
             {
