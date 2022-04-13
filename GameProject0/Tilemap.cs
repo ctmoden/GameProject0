@@ -20,6 +20,8 @@ namespace GameProject0
         /// </summary>
         private Texture2D texture;
 
+        private Vector2 position;
+
         private Rectangle[] tiles;
         /// <summary>
         /// map data for tilemap
@@ -37,6 +39,8 @@ namespace GameProject0
         private Random rand;
 
         private double transitionTimer;
+
+        private int heightOffset = 1;
 
         public Tilemap(string filename)
         {
@@ -117,7 +121,7 @@ namespace GameProject0
                     if (index == -1) continue;//skip one increment through this particular loop
                     spriteBatch.Draw(texture, new Vector2(
                         x * tileWidth,//how many pixels over each block is
-                        y * tileHeight
+                        (y * tileHeight)+heightOffset
                         ),
                         tiles[index], Color.White);
                 }
@@ -145,16 +149,19 @@ namespace GameProject0
         /// <param name="gameTime"></param>
         public void Update(GameTime gameTime)
         {
+            
             //deal with timing here
             transitionTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
-            if(transitionTimer > 2.0)
+            if(transitionTimer > 0.1)
             {
-                if(_yOffset2 < map.Length)
+                heightOffset += 1;
+                if (_yOffset2 < map.Length)
                 {
                     _yOffset1++;
                     _yOffset2++;
+                    
                 }                
-                transitionTimer -= 2.0;
+                transitionTimer -= 0.1;
             }
         }
         private void loadMap()
