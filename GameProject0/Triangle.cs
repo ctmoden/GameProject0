@@ -26,6 +26,12 @@ namespace GameProject0
         /// The game this triangle belongs to 
         /// </summary>
         Game game;
+
+
+
+        private int rotationSpeed;
+
+        private int xComponent;
         /// <summary>
         /// Initializes the vertices of the triangle
         /// </summary>
@@ -33,22 +39,25 @@ namespace GameProject0
         {
             vertices = new VertexPositionColor[3];
             // vertex 0
-            vertices[0].Position = new Vector3(0, 1, 0);
-            vertices[0].Color = Color.ForestGreen;
+            vertices[0].Position = new Vector3(0, 1, 0);//(0, 1, 0), keep same
+            vertices[0].Color = Color.Red;
             // vertex 1
-            vertices[1].Position = new Vector3(1, 1, 0);
+            vertices[1].Position = new Vector3(-1, 1, 0);//(1, 1, 0)
             vertices[1].Color = Color.Green;
             // vertex 2 
-            vertices[2].Position = new Vector3(1, 0, 0);
-            vertices[2].Color = Color.LawnGreen;
+            vertices[2].Position = new Vector3(xComponent, 0, 0);//(4, 0, 0)
+            vertices[2].Color = Color.Blue;
         }
         /// <summary>
         /// Constructs a triangle instance
+        /// Specifies rotation angle of triangle
         /// </summary>
         /// <param name="game">The game that is creating the triangle</param>
-        public Triangle(Game game)
+        public Triangle(Game game, int rotationSpeed, int xComponent)
         {
             this.game = game;
+            this.rotationSpeed = rotationSpeed;
+            this.xComponent = xComponent;
             InitializeVertices();
             InitializeEffect();
         }
@@ -61,7 +70,7 @@ namespace GameProject0
             effect = new BasicEffect(game.GraphicsDevice);
             effect.World = Matrix.Identity;
             effect.View = Matrix.CreateLookAt(
-                new Vector3(0, 0, 4), // The camera position
+                new Vector3(0, 0, 8), // The camera position (0, 0, 4)
                 new Vector3(0, 0, 0), // The camera target,
                 Vector3.Up            // The camera up vector
             );
@@ -107,9 +116,14 @@ namespace GameProject0
         /// <param name="gameTime">The GameTime object</param>
         public void Update(GameTime gameTime)
         {
-            float angle = (float)gameTime.TotalGameTime.TotalSeconds;
+            float angle = rotationSpeed * (float)gameTime.TotalGameTime.TotalSeconds;
             effect.World = Matrix.CreateRotationY(angle);
         }
+
+
+
+
+
     }
 
 }
