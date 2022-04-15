@@ -46,7 +46,7 @@ namespace GameProject0
         protected override void LoadContent()
         {
             gameScreen.LoadContent();
-            menuScreen.LoadContent();
+            menuScreen.LoadContent(this);
             backgroundMusic = Content.Load<Song>("Pure Country Gold - Wasted Day");
             spriteBatch = new SpriteBatch(GraphicsDevice);
             

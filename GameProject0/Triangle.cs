@@ -39,14 +39,14 @@ namespace GameProject0
         {
             vertices = new VertexPositionColor[3];
             // vertex 0
-            vertices[0].Position = new Vector3(0, 1, 0);//(0, 1, 0), keep same
-            vertices[0].Color = Color.Red;
+            vertices[0].Position = new Vector3(1, 1, 0);//(0, 1, 0), keep same
+            vertices[0].Color = Color.Black;
             // vertex 1
             vertices[1].Position = new Vector3(-1, 1, 0);//(1, 1, 0)
-            vertices[1].Color = Color.Green;
+            vertices[1].Color = Color.DarkGray;
             // vertex 2 
             vertices[2].Position = new Vector3(xComponent, 0, 0);//(4, 0, 0)
-            vertices[2].Color = Color.Blue;
+            vertices[2].Color = Color.DarkSlateGray;
         }
         /// <summary>
         /// Constructs a triangle instance
@@ -70,7 +70,7 @@ namespace GameProject0
             effect = new BasicEffect(game.GraphicsDevice);
             effect.World = Matrix.Identity;
             effect.View = Matrix.CreateLookAt(
-                new Vector3(0, 0, 8), // The camera position (0, 0, 4)
+                new Vector3(0, 0, 18), // The camera position (0, 0, 4)
                 new Vector3(0, 0, 0), // The camera target,
                 Vector3.Up            // The camera up vector
             );

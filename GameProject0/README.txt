@@ -7,3 +7,6 @@ Coins will randomly change color every .5 seconds
 The alpha blending is implemented in the MenuScreen.cs class only, not the GamePlayScreen.cs class
 
 Blending between clouds is very visible in menu screen 
+
+--UPDATE PROJECT 5
+2 3d triangles are rendered as spinning chopper blades in the loading screen

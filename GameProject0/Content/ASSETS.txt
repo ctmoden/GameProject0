@@ -19,6 +19,8 @@ Content/Pure Country Gold - Wasted Day.mp3 - created by Pure Country Gold (https
 Content/tileset.png - This is from the CIS 580 Tilemap Exercise created by Dr. Nathan Bean
 
 Content/Helicopter_Loop.png - created by elineo, released as "Helicopter Vertical Loop" on OpenGameArt.org (https://opengameart.org/content/helicopter-vertical-loop) under public domain.
-I built upon classes used in previous tutorials, specifically CoinSprite.cs, Collisions/BoundingCircle.cs, Collisions/BoundingRectangle.cs, and Collisions/CollisionHelper.cs
+- note I modified the section of the sprite sheet used in the menu screen to erase part of the sprite
+
+I built upon classes used in previous tutorials, specifically CoinSprite.cs, Collisions/BoundingCircle.cs, Collisions/BoundingRectangle.cs, Triangle.cs, and Collisions/CollisionHelper.cs
 
 I modified the structure of the AduiExample exercise to play the background music and sound effects
