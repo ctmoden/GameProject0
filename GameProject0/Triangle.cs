@@ -119,11 +119,6 @@ namespace GameProject0
             float angle = rotationSpeed * (float)gameTime.TotalGameTime.TotalSeconds;
             effect.World = Matrix.CreateRotationY(angle);
         }
-
-
-
-
-
     }
 
 }
