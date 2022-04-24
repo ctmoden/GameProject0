@@ -40,7 +40,7 @@ namespace GameProject0
 
         private double transitionTimer;
 
-        private int heightOffset = 1;
+        private int heightOffset;
 
         public Tilemap(string filename)
         {
@@ -83,20 +83,6 @@ namespace GameProject0
             var thirdLine = lines[2].Split(',');
             mapWidth = int.Parse(thirdLine[0]);
             mapHeight = int.Parse(thirdLine[1]);
-            initializeYOffsets();
-            //create our map
-            //each number in this long list represents the index of a tile in the tileset
-            var fourthLine = lines[3].Split(',');
-            /*map = new int[mapWidth * mapHeight];
-            //iterate through across y then x to avoid cach misses
-            //2d array => 1d
-            //imagine it as a 2d array with all tileset targets arranged to mirror the map
-            //except spread out across a 1d array
-            //iterate up to the area of the map to load 2d into 1d
-            for (int i = 0; i < mapWidth * mapHeight; i++)
-            {
-                map[i] = int.Parse(fourthLine[i]);
-            }*/
             loadMap();
         }
         /// <summary>
@@ -112,17 +98,16 @@ namespace GameProject0
             //a height of one and draw another row to top or bottom
             //use tiled
             #region old
-            for (int y = 0; y < mapHeight; y++)//for(int y = 0; y < mapHeight; y++)
+            for (int y = 0; y < mapHeight*1000; y++)//for(int y = 0; y < mapHeight; y++) (int y = 0; y < mapHeight; y++)
             {
                 for(int x = 0; x < mapWidth; x++)
                 {
-                    int i = (y*(_yOffset2-_yOffset1)) * mapWidth + x;
+                    int i = y * mapWidth + x;
                     int index = map[i] - 1;//map actually starting at 1, but indexed starting at 0
                     if (index == -1) continue;//skip one increment through this particular loop
                     spriteBatch.Draw(texture, new Vector2(
                         x * tileWidth,//how many pixels over each block is
-                        (y * tileHeight)+heightOffset
-                        ),
+                        (y * -tileHeight) + heightOffset),
                         tiles[index], Color.White);
                 }
             }
@@ -152,7 +137,7 @@ namespace GameProject0
             
             //deal with timing here
             transitionTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
-            if(transitionTimer > 0.1)
+            if(transitionTimer > 0.07)
             {
                 heightOffset += 1;
                 if (_yOffset2 < map.Length)
@@ -161,18 +146,23 @@ namespace GameProject0
                     _yOffset2++;
                     
                 }                
-                transitionTimer -= 0.1;
+                transitionTimer -= 0.07;
             }
         }
+
+        /// <summary>
+        /// Manually loads map instead of reading from file
+        /// </summary>
         private void loadMap()
         {
-            map = new int[mapWidth * mapHeight * 10];
+            map = new int[mapWidth * mapHeight * 10000];
             for (int i = 0; i < map.Length; i++)
             {
                 int randInt = rand.Next(1, 5);
                 if (randInt == 3) map[i] = 2;
                 else map[i] = randInt;
             }
+            heightOffset = mapHeight+Constants.GAME_HEIGHT;
         }
         private void initializeYOffsets()
         {
