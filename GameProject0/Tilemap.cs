@@ -98,7 +98,7 @@ namespace GameProject0
             //a height of one and draw another row to top or bottom
             //use tiled
             #region old
-            for (int y = 0; y < mapHeight*1000; y++)//for(int y = 0; y < mapHeight; y++) (int y = 0; y < mapHeight; y++)
+            for (int y = 0; y < mapHeight; y++)//for(int y = 0; y < mapHeight; y++) (int y = 0; y < mapHeight; y++)
             {
                 for(int x = 0; x < mapWidth; x++)
                 {
@@ -155,7 +155,7 @@ namespace GameProject0
         /// </summary>
         private void loadMap()
         {
-            map = new int[mapWidth * mapHeight * 10000];
+            map = new int[mapWidth * mapHeight];
             for (int i = 0; i < map.Length; i++)
             {
                 int randInt = rand.Next(1, 5);
