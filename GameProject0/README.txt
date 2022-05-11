@@ -14,3 +14,8 @@ Blending between clouds is very visible in menu screen
 --PROJECT 6 UPDATE
 
 This projected is reimplemented to redo game project 4 such that the tilemap rendered scrolls down on the loading screen 
+
+--FINAL GAME UPDATE
+
+High scores are recorded throughout gameplay when just switching screens, but won't serialize when game is shut down completely.
+Chopper cannot go off screen now 
