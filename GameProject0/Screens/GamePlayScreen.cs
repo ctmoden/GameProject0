@@ -108,7 +108,6 @@ namespace GameProject0.Screens
             foreach (var cloud in clouds) cloud.Update(chopper.Hit);
             if (coinCount > currentHighScore)
                 currentHighScore = coinCount;
-
         }
         /// <summary>
         /// Draws gameplay, asset movement and screen strings depend on state of chopper 
@@ -157,8 +156,8 @@ namespace GameProject0.Screens
                 //spriteBatch.Draw(explosion, new Vector2(chopper.Position.X, chopper.Position.Y),
                 //rectE, Color.White, 0f, new Vector2(64, 64), 10f, SpriteEffects.None, 0);
                 spriteBatch.DrawString(bangers, $"You got shot down!!  Press ecs to restart game", new Vector2(200, 200), Color.DarkRed, 0f, new Vector2(), .5f, SpriteEffects.None, 0);
-                if(coinCount > currentHighScore)
-                    spriteBatch.DrawString(bangers, $"New high score! {coinCount} coins collected! ", new Vector2(200, 300), Color.DarkRed, 0f, new Vector2(), .5f, SpriteEffects.None, 0);
+                if(coinCount > displayHighScore)
+                    spriteBatch.DrawString(bangers, $"New high score! {coinCount} coins collected! ", new Vector2(200, 250), Color.Green, 0f, new Vector2(), .5f, SpriteEffects.None, 0);
                 spriteBatch.DrawString(bangers, $"Survived: {playTime} seconds!", new Vector2(10, 30), Color.Gold, 0f, new Vector2(), .5f, SpriteEffects.None, 0);
                 if (_shaking)
                 {
@@ -203,7 +202,7 @@ namespace GameProject0.Screens
             hitCount = 0;
             playTime = "";
             chopper = new ChopperSprite();
-            
+            displayHighScore = currentHighScore;
             coins = new CoinSprite[]
             {
                 new CoinSprite(),
