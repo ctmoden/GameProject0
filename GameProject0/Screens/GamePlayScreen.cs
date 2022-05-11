@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Input;
 using System;
 using Microsoft.Xna.Framework.Media;
 using System.Threading;
+using Microsoft.Xna.Framework.Content;
 /// <summary>
 /// TO-DO: Pass graphics and Content
 /// </summary>
@@ -31,13 +32,17 @@ namespace GameProject0.Screens
         //END: From example in class Module "Special Effects"
         //tracks total seconds elapsed from beginning of each game start
         private float gameSeconds = 0.0f;
+        private int currentHighScore = 0;
+        private int displayHighScore = 0;
+        private ContentManager content;
         /// <summary>
         /// Constructor for game screen, sets parent game controller
         /// </summary>
         /// <param name="controller"></param>
-        public GamePlayScreen(GameController controller)
+        public GamePlayScreen(GameController controller, ContentManager content)
         {
-            this.controller = controller;           
+            this.controller = controller;
+            this.content = content;
         }
         /// <summary>
         /// Sets up game 
@@ -101,6 +106,9 @@ namespace GameProject0.Screens
                 missile.Update(chopper.Hit);
             }
             foreach (var cloud in clouds) cloud.Update(chopper.Hit);
+            if (coinCount > currentHighScore)
+                currentHighScore = coinCount;
+
         }
         /// <summary>
         /// Draws gameplay, asset movement and screen strings depend on state of chopper 
@@ -127,15 +135,16 @@ namespace GameProject0.Screens
             foreach (var missile in missiles) missile.Draw(gameTime, spriteBatch);
             foreach (var cloud in clouds) cloud.Draw(gameTime, spriteBatch);
             spriteBatch.DrawString(bangers, $"Coins Collected: {coinCount}", new Vector2(10, 10), Color.Gold, 0f, new Vector2(), .5f, SpriteEffects.None, 0);
+            spriteBatch.DrawString(bangers, $"High Score: {displayHighScore}", new Vector2(10, 50), Color.Gold, 0f, new Vector2(), .5f, SpriteEffects.None, 0);
             //if chopper is hit, game time is hidden.  If not, make text shows gametime
             switch (chopper.Hit)
             {
                 case false:
                     //want gametime to restart each time a game is played
-                    spriteBatch.DrawString(bangers, $"Game Time: {Math.Round(gameSeconds,2)}", new Vector2(30, 30), Color.Gold, 0f, new Vector2(), .5f, SpriteEffects.None, 0);
+                    spriteBatch.DrawString(bangers, $"Game Time: {Math.Round(gameSeconds,2)}", new Vector2(10, 30), Color.Gold, 0f, new Vector2(), .5f, SpriteEffects.None, 0);
                     break;
                 case true:
-                    spriteBatch.DrawString(bangers, $"Game Time: {Math.Round(gameSeconds, 2)}", new Vector2(30, 30), Color.Transparent, 0f, new Vector2(), .5f, SpriteEffects.None, 0);
+                    spriteBatch.DrawString(bangers, $"Game Time: {Math.Round(gameSeconds, 2)}", new Vector2(10, 30), Color.Transparent, 0f, new Vector2(), .5f, SpriteEffects.None, 0);
                     break;
             }
             chopper.Draw(gameTime, spriteBatch, false);
@@ -148,7 +157,9 @@ namespace GameProject0.Screens
                 //spriteBatch.Draw(explosion, new Vector2(chopper.Position.X, chopper.Position.Y),
                 //rectE, Color.White, 0f, new Vector2(64, 64), 10f, SpriteEffects.None, 0);
                 spriteBatch.DrawString(bangers, $"You got shot down!!  Press ecs to restart game", new Vector2(200, 200), Color.DarkRed, 0f, new Vector2(), .5f, SpriteEffects.None, 0);
-                spriteBatch.DrawString(bangers, $"Survived: {playTime} seconds!", new Vector2(30, 30), Color.Gold, 0f, new Vector2(), .5f, SpriteEffects.None, 0);
+                if(coinCount > currentHighScore)
+                    spriteBatch.DrawString(bangers, $"New high score! {coinCount} coins collected! ", new Vector2(200, 300), Color.DarkRed, 0f, new Vector2(), .5f, SpriteEffects.None, 0);
+                spriteBatch.DrawString(bangers, $"Survived: {playTime} seconds!", new Vector2(10, 30), Color.Gold, 0f, new Vector2(), .5f, SpriteEffects.None, 0);
                 if (_shaking)
                 {
                     _shakeTime += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
@@ -219,7 +230,14 @@ namespace GameProject0.Screens
                 new CloudSprite(),
                 new CloudSprite()
             };
-            
+            //readFileInfo();
+
+                       
+        }
+        private void readFileInfo()
+        {
+            FileReader.ReadFile(content);
+            currentHighScore = FileReader.GetHighScore();
         }
     }
 }

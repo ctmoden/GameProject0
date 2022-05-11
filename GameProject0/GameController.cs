@@ -34,7 +34,7 @@ namespace GameProject0
         protected override void Initialize()
         {
             menuScreen = new MenuScreen(this);
-            gameScreen = new GamePlayScreen(this);
+            gameScreen = new GamePlayScreen(this, Content);
             gameScreen.Initialize();
             menuScreen.Initialize();
             
