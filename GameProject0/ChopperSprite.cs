@@ -144,8 +144,16 @@ namespace GameProject0
             keyboardState = Keyboard.GetState();
             if (!hit)
             {
-                if (keyboardState.IsKeyDown(Keys.Left) || keyboardState.IsKeyDown(Keys.A)) position += new Vector2((float)-3.5, 0);
-                if (keyboardState.IsKeyDown(Keys.Right) || keyboardState.IsKeyDown(Keys.D)) position += new Vector2((float)3.5, 0);
+                if (keyboardState.IsKeyDown(Keys.Left) || keyboardState.IsKeyDown(Keys.A))
+                {
+                    if (position.X > -10) position += new Vector2((float)-3.5, 0);
+                    else position += new Vector2(0, 0);
+                }
+                if (keyboardState.IsKeyDown(Keys.Right) || keyboardState.IsKeyDown(Keys.D))
+                {
+                    if (position.X < Constants.GAME_WIDTH + 10) position += new Vector2((float)3.5, 0);
+                    else position += new Vector2(0, 0);
+                }
             }
             //FIXME add keys for wasd and or up/down arrows?
             //recenter bounding region as chopper moves
