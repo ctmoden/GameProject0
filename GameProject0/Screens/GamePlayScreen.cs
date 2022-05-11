@@ -67,7 +67,7 @@ namespace GameProject0.Screens
         public void Update(GameTime gameTime, out bool switchScreen)
         {
             keyboardState = Keyboard.GetState();
-            if (keyboardState.IsKeyDown(Keys.Escape) || keyboardState.IsKeyDown(Keys.Q))
+            if ((keyboardState.IsKeyDown(Keys.Escape) || keyboardState.IsKeyDown(Keys.Q)) && !_shaking)
             {
                 switchScreen = true;
                 gameSeconds = 0.0f;
