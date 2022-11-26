@@ -1,3 +1,5 @@
 ﻿Use the left (or A) and right (or D) keys to move the chopper across the screen horizontally.
 
 Collide with the coin sprites to collect coins while avoiding missile sprite volleys trying to shoot you down!
+
+A timer and coin count will display to show how long you survive and how many coins you collect.
